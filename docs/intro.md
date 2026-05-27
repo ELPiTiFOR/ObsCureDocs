@@ -43,8 +43,26 @@ games.
 ## ObsCure
 
 Each version of ObsCure has different HVP files. For the Steam version, we have
-`cachpack.hvp`, `datapack.hvp`, `kinepack.hvp` and `strmpack.hvp`. Once you have
-located the HVPs, unpack them with a specialized tool. 
+`cachpack.hvp`, `datapack.hvp`, `kinepack.hvp` and `strmpack.hvp`.
+
+The four HVP archives that ship with ObsCure (the first game) each
+hold a different category of data:
+
+| Archive          | Size (approx.) | Contents                                                                |
+|------------------|----------------|-------------------------------------------------------------------------|
+| `datapack.hvp`   | ~664 MB        | Main game content: text strings, scripts, models, textures, room data.  |
+| `cachpack.hvp`   | ~29 MB         | Preload cache textures (HUD, fonts, small icons).                       |
+| `kinepack.hvp`   | ~1.1 GB        | Pre-rendered cutscene videos.                                           |
+| `strmpack.hvp`   | ~634 MB        | Streaming audio (voice lines, music).                                   |
+
+If you're translating text or replacing UI textures, the file you
+care about is almost always `datapack.hvp`. The HUD font atlas
+(`font_holstein16.tga`) lives in `cachpack.hvp`.
+
+For the full binary layout of HVP archives see the
+[HVP section](formats.md/#hvp-obscure).
+
+Once you have located the HVPs, unpack them with a specialized tool.
 
 Once you have extracted the HVP files, you'll see a bunch of folders with
 names such as "_common", "_levels", etc, they all start with an underscore.
