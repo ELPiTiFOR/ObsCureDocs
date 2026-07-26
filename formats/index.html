@@ -1,0 +1,2080 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    <title>File Formats - ObsCure Docs</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "File Formats";
+        var mkdocs_page_input_path = "formats.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href=".." class="icon icon-home"> ObsCure Docs
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="..">Home</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../intro/">Introduction</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../items/">Items</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../events/">Events</a>
+                </li>
+              </ul>
+              <ul class="current">
+                <li class="toctree-l1 current"><a class="reference internal current" href="#">File Formats</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#it">IT</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#tm">TM</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#tm_coord_content">TM_Coord_Content:</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#tm_description_content">TM_Description_Content</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#tm_item_content">TM_Item_Content:</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#sav-obscure">SAV (ObsCure)</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#sav_header">SAV_Header</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#sav_items">SAV_Items</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#sav_characters">SAV_Characters</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#sav_progress">SAV_Progress</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#sav_general1_chunk_content">SAV_General1_Chunk_Content</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#sav_room_chunk_content">SAV_Room_Chunk_Content</a>
+    </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#hoe-obscure">HOE (ObsCure)</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#hoe_collision">HOE_Collision</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#hoe_imports">HOE_Imports</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#hoe_event">HOE_Event</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#hoe_instance">HOE_Instance</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#hvp-obscure">HVP (ObsCure)</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#hvp_header">HVP_Header</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#hvp_entry">HVP_Entry</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#hvp_dir_content">HVP_Dir_Content</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#hvp_file_content">HVP_File_Content</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#modifying-an-hvp">Modifying an HVP</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#lng-obscure">LNG (ObsCure)</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#lng_entry">LNG_Entry</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#lng_win1252_content">LNG_Win1252_Content</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#lng_utf16_content">LNG_UTF16_Content</a>
+    </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#map-obscure">MAP (ObsCure)</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#map_entry">MAP_Entry</a>
+    </li>
+        </ul>
+    </li>
+    </ul>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../hoelang/">HOE Language</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../binaries/">Binaries info</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../constants/">Constants & Types</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../about/">About</a>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">ObsCure Docs</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">File Formats</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="file-formats">File formats</h1>
+<p>The "Size" column in each table should be interpreted in bytes, unless specified
+otherwise.</p>
+<p>The <code>Type[N]</code> notation represents a sequence of <code>N</code> structures of
+type <code>Type</code>, but it doesn't necessarily mean that all <code>Type</code>s have the same
+length. It just means that you have a <code>Type</code>, then another, and another, until
+you reach <code>N</code> occurrences.</p>
+<h2 id="it">IT</h2>
+<p>General structure of the <code>.it</code> format (everything is in MSB):</p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Size</th>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>IT_Item[X]</td>
+<td>sizeof(IT_Item)*X</td>
+<td>Items</td>
+<td>Sequence of all pickable items in the game.</td>
+</tr>
+</tbody>
+</table>
+<p>The X represents any natural number, this format doesn't have a specific number
+of minimal or maximal items. So this file is just a sequence of IT_Items.</p>
+<p>Structure of IT_Item:</p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Size</th>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ITEM_TYPE</td>
+<td>4</td>
+<td>Type</td>
+<td>Type of item.</td>
+</tr>
+<tr>
+<td>uint32</td>
+<td>4</td>
+<td>UID</td>
+<td>UID of item.</td>
+</tr>
+<tr>
+<td>EXTRA_INFO</td>
+<td>4</td>
+<td>Extra info</td>
+<td>Specifies the document, photo, map or statuette if needed.</td>
+</tr>
+<tr>
+<td>uint32</td>
+<td>4</td>
+<td>Multiplier</td>
+<td>Multiplier for the ammunition.</td>
+</tr>
+<tr>
+<td>DIFF_MODE</td>
+<td>4</td>
+<td>Diff mode</td>
+<td>Tells in which difficulty and mode the item shows up.</td>
+</tr>
+</tbody>
+</table>
+<p>For more info on each type, check these links:</p>
+<ul>
+<li><a href="../constants/#item_type">ITEM_TYPE</a></li>
+<li><a href="../constants/#extra_info">EXTRA_INFO</a></li>
+<li><a href="../constants/#diff_mode">DIFF_MODE</a></li>
+</ul>
+<h2 id="tm">TM</h2>
+<p>General structure of the <code>.tm</code> format (everything is in MSB):</p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Size</th>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>uint32</td>
+<td>4</td>
+<td>???</td>
+<td>??? usually 0x05 or 0x04</td>
+</tr>
+<tr>
+<td>TM_Section[X]</td>
+<td>sizeof(TM_Section)*X</td>
+<td>Sections</td>
+<td>All sections of the TM file.</td>
+</tr>
+</tbody>
+</table>
+<p>Structure of TM_Section:</p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Size</th>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>TM_SECTION_TYPE</td>
+<td>4</td>
+<td>Section type</td>
+<td>Depending on this type, the content will be different.</td>
+</tr>
+<tr>
+<td>uint32</td>
+<td>4</td>
+<td>Size</td>
+<td>Size 'L' of the content, including these 4 bytes.</td>
+</tr>
+<tr>
+<td>TM_Generic_Content</td>
+<td>L - 4</td>
+<td>Content</td>
+<td>Content of the section.</td>
+</tr>
+</tbody>
+</table>
+<p>TM_SECTION_TYPE can have the following values:</p>
+<table>
+<thead>
+<tr>
+<th>Value</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0x01</td>
+<td>Camera angles</td>
+</tr>
+<tr>
+<td>0x04</td>
+<td>Door coordinates (?)</td>
+</tr>
+<tr>
+<td>0x06</td>
+<td>NPC section (?)</td>
+</tr>
+<tr>
+<td>0x07</td>
+<td>Description section (?)</td>
+</tr>
+<tr>
+<td>0x08</td>
+<td>Item section</td>
+</tr>
+</tbody>
+</table>
+<p>TM_Generic_Content is just a union of these structures:</p>
+<ul>
+<li>TM_Coord_Content</li>
+<li>TM_Description_Content</li>
+<li>TM_Item_Content</li>
+</ul>
+<p>Depending on the TM_SECTION_TYPE, the content must be interpreted in different
+ways. For example, if TM_SECTION_TYPE is <code>0x08</code>, then the content of the section
+must be interpreted as a TM_Item_Content structure. Here are the formats of each
+of the previous structures.</p>
+<h3 id="tm_coord_content">TM_Coord_Content:</h3>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Size</th>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>???</td>
+<td>4</td>
+<td>???</td>
+<td>???</td>
+</tr>
+<tr>
+<td>???</td>
+<td>4</td>
+<td>???</td>
+<td>???</td>
+</tr>
+<tr>
+<td>uint32</td>
+<td>4</td>
+<td>X pos 1</td>
+<td>Coordinate along the X axis of player.</td>
+</tr>
+<tr>
+<td>uint32</td>
+<td>4</td>
+<td>Y pos 1</td>
+<td>Coordinate along the Y axis of player.</td>
+</tr>
+<tr>
+<td>uint32</td>
+<td>4</td>
+<td>Z pos 1</td>
+<td>Coordinate along the Z axis of player.</td>
+</tr>
+<tr>
+<td>float</td>
+<td>4</td>
+<td>???</td>
+<td>???</td>
+</tr>
+<tr>
+<td>float</td>
+<td>4</td>
+<td>???</td>
+<td>???</td>
+</tr>
+<tr>
+<td>???</td>
+<td>4</td>
+<td>???</td>
+<td>??? 0x00 00 00 00 ?</td>
+</tr>
+<tr>
+<td>uint32</td>
+<td>4</td>
+<td>X pos 2</td>
+<td>Coordinate along the X axis of teammate.</td>
+</tr>
+<tr>
+<td>uint32</td>
+<td>4</td>
+<td>Y pos 2</td>
+<td>Coordinate along the Y axis of teammate.</td>
+</tr>
+<tr>
+<td>uint32</td>
+<td>4</td>
+<td>Z pos 2</td>
+<td>Coordinate along the Z axis of teammate.</td>
+</tr>
+<tr>
+<td>float</td>
+<td>4</td>
+<td>???</td>
+<td>???</td>
+</tr>
+<tr>
+<td>float</td>
+<td>4</td>
+<td>???</td>
+<td>???</td>
+</tr>
+<tr>
+<td>???</td>
+<td>4</td>
+<td>???</td>
+<td>??? 0x00 00 00 00 ?</td>
+</tr>
+</tbody>
+</table>
+<p>These TM_Coord_Content seem to hold info on the position and rotation of both
+characters (player and teammate, or Player 1 and Player 2) when they enter the
+room through a specific door. The first 2 fields probably specify the door.</p>
+<h3 id="tm_description_content">TM_Description_Content</h3>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Size</th>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>uint32</td>
+<td>4</td>
+<td>Index</td>
+<td>The index of the description among all descriptions in the room.</td>
+</tr>
+<tr>
+<td>float</td>
+<td>4</td>
+<td>PosX</td>
+<td>X coordinate of the box that triggers the description.</td>
+</tr>
+<tr>
+<td>float</td>
+<td>4</td>
+<td>PosY</td>
+<td>Y coordinate of the box that triggers the description.</td>
+</tr>
+<tr>
+<td>float[14]</td>
+<td>4*14</td>
+<td>???</td>
+<td>??? Probably Z coordinate, the rotation, etc</td>
+</tr>
+<tr>
+<td>uint32</td>
+<td>4</td>
+<td>Text ID</td>
+<td>An ID associated with a text in the LNG files.</td>
+</tr>
+</tbody>
+</table>
+<p>These TM_Description_Contents hold information on the elements in the rooms that
+display a text in the bottom part of the screen when pressing the X/A/Enter
+button/key.</p>
+<h3 id="tm_item_content">TM_Item_Content:</h3>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Size</th>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ITEM_TYPE</td>
+<td>4</td>
+<td>Type</td>
+<td>The type of the item. Same as in <code>allitems.it</code>.</td>
+</tr>
+<tr>
+<td>uint32</td>
+<td>4</td>
+<td>UID</td>
+<td>The UID of the item. Same as in <code>allitems.it</code>.</td>
+</tr>
+<tr>
+<td>float</td>
+<td>4</td>
+<td>X pos</td>
+<td>The position along the X axis.</td>
+</tr>
+<tr>
+<td>float</td>
+<td>4</td>
+<td>Y pos</td>
+<td>The position along the Y axis.</td>
+</tr>
+<tr>
+<td>float</td>
+<td>4</td>
+<td>X pos</td>
+<td>The position along the Z axis.</td>
+</tr>
+<tr>
+<td>float[9]</td>
+<td>36</td>
+<td>Rotation</td>
+<td>The rotation of the item, a rotation matrix encoded as an array of 9 floats.</td>
+</tr>
+<tr>
+<td>uint32</td>
+<td>4</td>
+<td>Item info length</td>
+<td>The length of the following uint8 array. The value is L2.</td>
+</tr>
+<tr>
+<td>uint8[L2]</td>
+<td>L2</td>
+<td>Item info</td>
+<td>Gives information like the multiplier, the DIFF_MODE and the EXTRA_INFO.</td>
+</tr>
+</tbody>
+</table>
+<p>The Item info is an array of printable characters (like a string that doesn't
+end with <code>0x00</code>), it can take several shapes and each has a slighly different
+meaning. This array shows a bunch of numbers (sometimes letters) separated by
+slashes, for example: "1/1/7", "1/1", or "1/B". When there are three
+numbers/letters, the first one is the multiplier in decimal, and the third one
+is the diff_mode in hexadecimal. When there are two, the first one is probably
+the multiplier (which is always "1"), and the second one is the extra_info, but
+left padded with zeros to occupy 8 characters (because it represents a 4 bytes
+integer) ONLY WHEN the item corresponds to a document, photo or statuette (for
+example, "1/00020834"), not with maps. With maps we only have the letter itself,
+like for example "1/C". When it's just one number, it's usually 1 and it
+probably represents the multiplier, the diff_mode is probably "7" by default and
+the extra_info "1" (which corresponds to an EXTRA_INFO of <code>0x00000000</code> in the
+<code>allitems.it</code> file) by default.</p>
+<p>More research on this last field is needed.</p>
+<h2 id="sav-obscure">SAV (ObsCure)</h2>
+<p>General structure of the <code>.sav</code> files of the first game (everything is in LSB):</p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Size</th>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SAV_Header</td>
+<td>22</td>
+<td>Header</td>
+<td>Gives general info on the game.</td>
+</tr>
+<tr>
+<td>SAV_Items</td>
+<td></td>
+<td>ItemsAndInfo</td>
+<td>Sequence of picked up items.</td>
+</tr>
+<tr>
+<td>SAV_Characters</td>
+<td></td>
+<td>Characters</td>
+<td>Information on each playable character.</td>
+</tr>
+<tr>
+<td>SAV_Progress</td>
+<td></td>
+<td>Progress</td>
+<td>Progress in the game and in each room.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="sav_header">SAV_Header</h3>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Size</th>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>uint32</td>
+<td>4</td>
+<td>CRC32</td>
+<td>CRC32 checksum of the rest of the contents of the file.</td>
+</tr>
+<tr>
+<td>uint8</td>
+<td>1</td>
+<td>???</td>
+<td>??? 0x06</td>
+</tr>
+<tr>
+<td>uint32</td>
+<td>4</td>
+<td>Index</td>
+<td>Index of the savefile. It's 'N' in "gameN.sav".</td>
+</tr>
+<tr>
+<td>ROOM_ID_SHORT</td>
+<td>1</td>
+<td>Room</td>
+<td>Room where the game was saved.</td>
+</tr>
+<tr>
+<td>uint32</td>
+<td>4</td>
+<td>Play time</td>
+<td>Duration of the gameplay in milliseconds.</td>
+</tr>
+<tr>
+<td>uint8</td>
+<td>1</td>
+<td>Times saved</td>
+<td>Number of times the player saved the game.</td>
+</tr>
+<tr>
+<td>???</td>
+<td>2</td>
+<td>???</td>
+<td>???</td>
+</tr>
+<tr>
+<td>DIFF_MODE</td>
+<td>1</td>
+<td>Diff mode</td>
+<td>Difficulty and mode of the game.</td>
+</tr>
+<tr>
+<td>???</td>
+<td>2</td>
+<td>???</td>
+<td>??? Usually 0x6400</td>
+</tr>
+<tr>
+<td>uint16</td>
+<td>2</td>
+<td>Length of rest</td>
+<td>Length of SAV_Items + SAV_Characters (excluding these 2 bytes).</td>
+</tr>
+</tbody>
+</table>
+<p>For more info on the ROOM_ID_SHORT type, check
+<a href="../constants/#room_id-and-room_id_short">this link</a>.</p>
+<h3 id="sav_items">SAV_Items</h3>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Size</th>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>uint16</td>
+<td>2</td>
+<td>Length of SAV_Items</td>
+<td>Length of this SAV_Items section (including these 2 bytes).</td>
+</tr>
+<tr>
+<td>uint8</td>
+<td>1</td>
+<td>Inventory capacity</td>
+<td>Let's call the value 'I'. I * sizeof(SAV_ItemOrAmmo) = Length of SAV_Items - 3.</td>
+</tr>
+<tr>
+<td>SAV_ItemOrAmmo[I]</td>
+<td>I*9</td>
+<td>Items</td>
+<td>Sequence of items, the inventory itself.</td>
+</tr>
+</tbody>
+</table>
+<p>Sav_ItemOrAmmo is the union of the following types:</p>
+<ul>
+<li>SAV_Item</li>
+<li>SAV_Ammo</li>
+</ul>
+<p>SAV_Item:</p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Size</th>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>uint32</td>
+<td>4</td>
+<td>Item UID</td>
+<td>Unique identifier for the item.</td>
+</tr>
+<tr>
+<td>uint8</td>
+<td>1</td>
+<td>Number</td>
+<td>How many examples of this item the player has.</td>
+</tr>
+<tr>
+<td>EXTRA_INFO</td>
+<td>4</td>
+<td>Extra info</td>
+<td>Extra info on the item.</td>
+</tr>
+</tbody>
+</table>
+<p>SAV_Ammo:</p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Size</th>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>AMMO_TYPE</td>
+<td>1</td>
+<td>Ammo type</td>
+<td><code>0x06</code> for shotgun and <code>0x07</code> for handgun.</td>
+</tr>
+<tr>
+<td>uint32</td>
+<td>4</td>
+<td>???</td>
+<td>0x00 00 00 XX where 0xXX is the least valuable byte of Quantity.</td>
+</tr>
+<tr>
+<td>uint32</td>
+<td>4</td>
+<td>Quantity</td>
+<td>Quantity of ammunition of said type.</td>
+</tr>
+</tbody>
+</table>
+<p>Despite being "Quantity" in LSB (like everything in SAV files), "???" is in MSB.
+So the first 3 bytes are zeros and the 4th byte is this <code>0xXX</code> described above.</p>
+<p>At this point you might wonder how the game knows if the SAV_ItemOrAmmo is a
+SAV_Item or a SAV_Ammo. The game checks the first byte, if it's a <code>0x06</code> or a
+<code>0x07</code>, then it's a SAV_Ammo, otherwise it's a SAV_Item. That's because there
+is no item UID in the game ending with <code>0x06</code> or <code>0x07</code> (note how I wrote
+"ending" instead of "starting" because it's in LSB).</p>
+<h3 id="sav_characters">SAV_Characters</h3>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Size</th>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SAV_Character[5]</td>
+<td></td>
+<td>Characters</td>
+<td>An array of 5 SAV_Character structures.</td>
+</tr>
+</tbody>
+</table>
+<p>In this sequence of 5 SAV_Character, the order of the characters is Stan, Josh,
+Kenny, Ashley and Shannon.</p>
+<p>SAV_Character:</p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Size</th>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>uint16</td>
+<td>2</td>
+<td>Length of SAV_Character</td>
+<td>Length of SAV_Character (including these 2 bytes).</td>
+</tr>
+<tr>
+<td>uint8</td>
+<td>1</td>
+<td>Capacity</td>
+<td>Weapons inventory capacity. Let's call it 'W'.</td>
+</tr>
+<tr>
+<td>uint32</td>
+<td>4</td>
+<td>Door</td>
+<td>Represents the door next to which the character is standing.</td>
+</tr>
+<tr>
+<td>uint8</td>
+<td>1</td>
+<td>Room</td>
+<td>Room where the character is located.</td>
+</tr>
+<tr>
+<td>bool</td>
+<td>1</td>
+<td>IsTeammate?</td>
+<td>??? <code>0x01</code> if this character is the teammate, <code>0x00</code> otherwise.</td>
+</tr>
+<tr>
+<td>float</td>
+<td>4</td>
+<td>X pos?</td>
+<td>Coordinate of the character along the X axis.</td>
+</tr>
+<tr>
+<td>float</td>
+<td>4</td>
+<td>Y pos?</td>
+<td>Coordinate of the character along the Y axis.</td>
+</tr>
+<tr>
+<td>float</td>
+<td>4</td>
+<td>Z pos?</td>
+<td>Coordinate of the character along the Z axis.</td>
+</tr>
+<tr>
+<td>uint8</td>
+<td>1</td>
+<td>Rotation?</td>
+<td>Rotation of the character.</td>
+</tr>
+<tr>
+<td>uint32</td>
+<td>4</td>
+<td>Current weapon UID</td>
+<td>The Item UID of the weapon the character is holding.</td>
+</tr>
+<tr>
+<td>???</td>
+<td>29</td>
+<td>???</td>
+<td>???</td>
+</tr>
+<tr>
+<td>float</td>
+<td>4</td>
+<td>Health</td>
+<td>Health of the character.</td>
+</tr>
+<tr>
+<td>SAV_Weapon[W]</td>
+<td>W*9</td>
+<td>Weapons</td>
+<td>Weapons inventory of the character.</td>
+</tr>
+</tbody>
+</table>
+<p>SAV_Weapon:</p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Size</th>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>uint32</td>
+<td>4</td>
+<td>Weapon item UID</td>
+<td>Unique identifier of the weapon (which is also a pickable item).</td>
+</tr>
+<tr>
+<td>uint8</td>
+<td>1</td>
+<td>Quantity</td>
+<td>Quantity of said weapon (always <code>0x01</code>).</td>
+</tr>
+<tr>
+<td>Ammo_Flash_Info</td>
+<td>4</td>
+<td>AmmoFlashlight</td>
+<td>Ammo in the chamber of the weapon and attached flashlight.</td>
+</tr>
+</tbody>
+</table>
+<p>Ammo_Flash_Info has a weird structure, let's imagine this as a uint32 in its
+MSB notation (even though it's stored in LSB in the <code>.sav</code> file):
+<code>0xXX XX XY YY</code>, the least valuable byte is <code>0xYY</code>, the next one is <code>0xXY</code>, then
+the two <code>0xXX</code>. <code>0xXX XX X</code> stores information on the flashlight that is
+attached to the gun, while <code>0xY YY</code> stores the ammunition the gun holds in its
+chamber. Usually the game only uses 8bits (or even 4bits, since it's usually a
+number between 0 and 15), so the least valuable byte <code>0xYY</code>, but it actually
+reads the 12bits <code>0xY YY</code>, so you can actually have up until 16^3 - 1 bullets in
+the chamber if you modify the <code>.sav</code> file manually.</p>
+<h3 id="sav_progress">SAV_Progress</h3>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Size</th>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SAV_Progress_Chunk[]</td>
+<td></td>
+<td>Chunks</td>
+<td>Each of these generic chunks give information on the progress in the game.</td>
+</tr>
+</tbody>
+</table>
+<p>SAV_Progress_Chunk:</p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Size</th>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>uint16</td>
+<td>2</td>
+<td>Length</td>
+<td>Length of the chunk (excluding these 2 bytes). Let's call it 'C'.</td>
+</tr>
+<tr>
+<td>SAV_Chunk_Content</td>
+<td>C</td>
+<td>Content</td>
+<td>The content of the chunk, which can have different structures.</td>
+</tr>
+</tbody>
+</table>
+<p>The first 3 SAV_Progress_Chunks give general information on the progress in the
+game, like, for example, the drawings in the map. While the other chunks give
+information on each specific room. The SAV_Chunk_Content structure is a union of
+the following structures:</p>
+<ul>
+<li>SAV_General1_Chunk_Content</li>
+<li>SAV_Room_Chunk_Content</li>
+</ul>
+<h4 id="sav_general1_chunk_content">SAV_General1_Chunk_Content</h4>
+<p>This is the first Progress Chunk, it gives general information on the progress
+in the game. Structure of the SAV_General1_Chunk_Content:</p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Size</th>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>bool02</td>
+<td>1</td>
+<td>isKennysBagTaken</td>
+<td>Has Kenny's bag been stolen?</td>
+</tr>
+<tr>
+<td>???</td>
+<td>29</td>
+<td>???</td>
+<td>???</td>
+</tr>
+<tr>
+<td>bool</td>
+<td>1</td>
+<td>friedLibKin</td>
+<td>Has Friedman's Kinematic at the library been triggered?</td>
+</tr>
+<tr>
+<td>???</td>
+<td>11</td>
+<td>???</td>
+<td>???</td>
+</tr>
+<tr>
+<td>bool02</td>
+<td>1</td>
+<td>diningHallLightsOn</td>
+<td>Are the lights in the Dining Hall on?</td>
+</tr>
+<tr>
+<td>???</td>
+<td>77</td>
+<td>???</td>
+<td>???</td>
+</tr>
+<tr>
+<td>bool</td>
+<td>1</td>
+<td>stanFound</td>
+<td>Is Stan in the team? Has his cutscene been triggered?</td>
+</tr>
+<tr>
+<td>MAP_DRAWING</td>
+<td>1</td>
+<td>mapDrawing</td>
+<td>What drawing can be seen in the map?</td>
+</tr>
+<tr>
+<td>???</td>
+<td>38</td>
+<td>???</td>
+<td>???</td>
+</tr>
+</tbody>
+</table>
+<p>Bool is <code>0x00</code> if false and <code>0x01</code> if true. Bool02 is <code>0x00</code> if false and <code>0x02</code>
+if true. The size of this structure is always <code>0xA0</code>.</p>
+<p>MAP_DRAWING can take these hexadecimal values:</p>
+<table>
+<thead>
+<tr>
+<th>MAP_DRAWING</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>01</td>
+<td>“Friedman” on the classrooms building</td>
+</tr>
+<tr>
+<td>02</td>
+<td>“Friedman” on the library building</td>
+</tr>
+<tr>
+<td>03</td>
+<td>“Janitor”</td>
+</tr>
+<tr>
+<td>04</td>
+<td>“Nurse” and arrow</td>
+</tr>
+<tr>
+<td>05</td>
+<td>Wheel on the Administration building</td>
+</tr>
+<tr>
+<td>06</td>
+<td>Stairs on amphitheatre</td>
+</tr>
+<tr>
+<td>07</td>
+<td>“Nurse” again (and lockers?)</td>
+</tr>
+<tr>
+<td>08</td>
+<td>Keyhole on the library building</td>
+</tr>
+<tr>
+<td>09</td>
+<td>Projector on amphitheatre</td>
+</tr>
+<tr>
+<td>0A</td>
+<td>Keypad on the big door</td>
+</tr>
+</tbody>
+</table>
+<h4 id="sav_room_chunk_content">SAV_Room_Chunk_Content</h4>
+<p>This structure gives information on a specific room like the monsters and their
+health, the position of props, the items that have been picked up, etc.
+Structure of the SAV_Room_Chunk_Content:</p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Size</th>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ROOM_ID_SHORT</td>
+<td>1</td>
+<td>Room</td>
+<td>The chunk gives information on this room.</td>
+</tr>
+<tr>
+<td>???</td>
+<td>1</td>
+<td>???</td>
+<td>??? Gives information on the kinematics that have been played in the room?</td>
+</tr>
+<tr>
+<td>???</td>
+<td>1</td>
+<td>???</td>
+<td>??? 0x00?</td>
+</tr>
+<tr>
+<td>???</td>
+<td>?</td>
+<td>???</td>
+<td>???</td>
+</tr>
+</tbody>
+</table>
+<h2 id="hoe-obscure">HOE (ObsCure)</h2>
+<p>Here's the general structure of HOE files (everything is in MSB):</p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Size</th>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>float?</td>
+<td>4</td>
+<td>???</td>
+<td>???</td>
+</tr>
+<tr>
+<td>HOE_Chunk[]</td>
+<td>?</td>
+<td>Chunks</td>
+<td>A sequence of chunks, there are different types.</td>
+</tr>
+<tr>
+<td>uint32</td>
+<td>4</td>
+<td>End</td>
+<td><code>0x00 00 00 04</code> indicating the end of the file.</td>
+</tr>
+</tbody>
+</table>
+<p>The HOE_Chunk structure is the following:</p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Size</th>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>HOE_CHUNK_TYPE</td>
+<td>4</td>
+<td>Chunk type</td>
+<td>Specifies the type of chunk, and how its content must be intepreted</td>
+</tr>
+<tr>
+<td>HOE_Content</td>
+<td>?</td>
+<td>Content</td>
+<td>The content of the chunk.</td>
+</tr>
+</tbody>
+</table>
+<p>HOE_CHUNK_TYPE can have the following values:</p>
+<table>
+<thead>
+<tr>
+<th>Value</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0x02</td>
+<td>Collisions</td>
+</tr>
+<tr>
+<td>0x03</td>
+<td>Imported functions ???</td>
+</tr>
+<tr>
+<td>0x05</td>
+<td>Event definition</td>
+</tr>
+<tr>
+<td>0x06</td>
+<td>Event Instances</td>
+</tr>
+</tbody>
+</table>
+<p>Chunks of the same type are always contiguous, and the order in which the
+types of chunks are found in the file is the following: <code>0x03</code> (if there is
+any), <code>0x02</code>, <code>0x05</code>, and finally <code>0x06</code>.</p>
+<p>HOE_Content is just the union of the following structures:</p>
+<ul>
+<li>HOE_Collision</li>
+<li>HOE_Imports</li>
+<li>HOE_Event</li>
+<li>HOE_Instance</li>
+</ul>
+<p>Depending on the chunk type, the content must be interpreted as one of the
+following structures.</p>
+<h3 id="hoe_collision">HOE_Collision</h3>
+<p>This structure defines the collisions of the room. Thanks to it, characters
+don't pass through tables, walls, etc. Here's its format:</p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Size</th>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>uint32</td>
+<td>4</td>
+<td>Length of chunk</td>
+<td>Length of the chunk, including these 4 bytes. Let's call it L.</td>
+</tr>
+<tr>
+<td>???</td>
+<td>L-4</td>
+<td>???</td>
+<td>??? Unknown format</td>
+</tr>
+</tbody>
+</table>
+<h3 id="hoe_imports">HOE_Imports</h3>
+<p>This structure seems to mention the name of some functions. Here's its format:</p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Size</th>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>uint32</td>
+<td>4</td>
+<td>Length of chunk</td>
+<td>Length of the chunk, including these 4 bytes. Let's call it L.</td>
+</tr>
+<tr>
+<td>???</td>
+<td>L-4</td>
+<td>???</td>
+<td>??? Unknown format</td>
+</tr>
+</tbody>
+</table>
+<h3 id="hoe_event">HOE_Event</h3>
+<p>There's still a lot of research to do, especially regarding the scripting
+language, but this is more or less the structure of the event definitions (most
+of the time):</p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Size</th>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>float</td>
+<td>4</td>
+<td>???</td>
+<td>Always 4.0??</td>
+</tr>
+<tr>
+<td>LString</td>
+<td>?</td>
+<td>Name</td>
+<td>Name of the event.</td>
+</tr>
+<tr>
+<td>???</td>
+<td>?</td>
+<td>???</td>
+<td>???</td>
+</tr>
+<tr>
+<td>uint32</td>
+<td>4</td>
+<td>Number of strings</td>
+<td>Number of following strings, let's call it N.</td>
+</tr>
+<tr>
+<td>LString[N]</td>
+<td>?*N</td>
+<td>Strings?</td>
+<td>???</td>
+</tr>
+<tr>
+<td>uint32</td>
+<td>4</td>
+<td>Number of vars</td>
+<td>Number of following variables, let's call it V.</td>
+</tr>
+<tr>
+<td>HOE_Var[V]</td>
+<td>8*V</td>
+<td>Vars</td>
+<td>Variables used in HOE scripts.</td>
+</tr>
+<tr>
+<td>uint32</td>
+<td>4</td>
+<td>Number of -1s</td>
+<td>Number of following <code>0xFF FF FF FF</code>??? Let's call it M.</td>
+</tr>
+<tr>
+<td>uint32[M]</td>
+<td>4*M</td>
+<td>Minus ones???</td>
+<td>An array of <code>0xFF FF FF FF</code>s???</td>
+</tr>
+<tr>
+<td>???</td>
+<td>???</td>
+<td>Script</td>
+<td>This is a script in some bytecode language. Unknown format.</td>
+</tr>
+</tbody>
+</table>
+<p>For more information on LStrings, check <a href="../constants/#lstring">this link</a>.
+The scripting language includes a lot of strings that seem to be function names,
+it also includes what seems to be a bunch of OP codes, like <code>0x65</code>, <code>0xC9</code>,
+<code>0xD0</code>, etc. It also includes sometimes 32bits integers that represent a
+HOE_Var, to be precise they are the index of a specific HOE_Var in the <code>Vars</code>
+array. The scripts sometimes end with <code>0x00 00 00 07</code>.</p>
+<p>The HOE_Var structure has the following format:</p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Size</th>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>HOE_VAR_TYPE</td>
+<td>4</td>
+<td>Type</td>
+<td>The type of the value.</td>
+</tr>
+<tr>
+<td>uint32/float</td>
+<td>4</td>
+<td>Value</td>
+<td>The value.</td>
+</tr>
+</tbody>
+</table>
+<p>HOE_VAR_TYPE dictates how the value must be intepreted. It can have the
+following values:</p>
+<table>
+<thead>
+<tr>
+<th>Value</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0x01</td>
+<td>Unsigned Integer</td>
+</tr>
+<tr>
+<td>0x02</td>
+<td>Float</td>
+</tr>
+</tbody>
+</table>
+<h3 id="hoe_instance">HOE_Instance</h3>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Size</th>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>uint8</td>
+<td>1</td>
+<td>???</td>
+<td>???</td>
+</tr>
+<tr>
+<td>uint32</td>
+<td>4</td>
+<td>Length of Instance chunk</td>
+<td>The length of the rest of this chunk, including these 4 bytes.</td>
+</tr>
+<tr>
+<td>???</td>
+<td>???</td>
+<td>Unknown content</td>
+<td>???</td>
+</tr>
+</tbody>
+</table>
+<p>Among other things, in the "Unknown content" you can find the coordinates of
+monsters (when the HOE_Instance represents a monster, which is not always the
+case) in the form of an array of 3 floats (X, Y and Z), usually after the
+"gIsAttacking" string.</p>
+<h2 id="hvp-obscure">HVP (ObsCure)</h2>
+<p><code>.hvp</code> is the archive container used by the engine to ship the game's
+data. The game reads from four of them: <code>datapack.hvp</code>, <code>cachpack.hvp</code>,
+<code>kinepack.hvp</code>, and <code>strmpack.hvp</code>. Internally a <code>.hvp</code> is a header,
+followed by a tree-structured table of contents, followed by a region
+of zlib-compressed file blobs.</p>
+<p>General structure of the <code>.hvp</code> format (everything is in MSB):</p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Size</th>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>HVP_Header</td>
+<td>40</td>
+<td>Header</td>
+<td>File-wide header, including the two CRC32s and the root entry count.</td>
+</tr>
+<tr>
+<td>HVP_Entry[]</td>
+<td>?</td>
+<td>TOC entries</td>
+<td>A tree of directory and file entries describing every packed file.</td>
+</tr>
+<tr>
+<td>uint8[]</td>
+<td>?</td>
+<td>Data</td>
+<td>Concatenation of all packed file blobs. Each blob is referenced by offset.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="hvp_header">HVP_Header</h3>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Size</th>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>???</td>
+<td>28</td>
+<td>???</td>
+<td>Magic and reserved engine fields. Always identical across all four archives.</td>
+</tr>
+<tr>
+<td>uint32</td>
+<td>4</td>
+<td>Data offset</td>
+<td>Offset (relative to byte 40) where the data section starts. Also = TOC byte size.</td>
+</tr>
+<tr>
+<td>uint32</td>
+<td>4</td>
+<td>Header CRC32</td>
+<td>CRC32 of bytes <code>[0..31]</code> (i.e. everything before the two CRC fields).</td>
+</tr>
+<tr>
+<td>uint32</td>
+<td>4</td>
+<td>Entries CRC32</td>
+<td>CRC32 of bytes <code>[40..40+Data_offset]</code>, i.e. of the entire TOC section.</td>
+</tr>
+<tr>
+<td>uint32</td>
+<td>4</td>
+<td>Root count</td>
+<td>Number of top-level entries in the TOC.</td>
+</tr>
+</tbody>
+</table>
+<p>After the header (at file offset 40), the TOC begins. Both CRC32s use
+the standard polynomial <code>0xEDB88320</code>. They are validated on read; if
+either fails the engine refuses to mount the archive.</p>
+<h3 id="hvp_entry">HVP_Entry</h3>
+<p>The TOC is a tree of <code>HVP_Entry</code> records. Each record is either a
+directory (which holds a child count and a list of children that
+follow it sequentially) or a file (which holds metadata for a packed
+blob). The two variants share a leading 4-byte size field but
+otherwise have different layouts:</p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Size</th>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>uint32</td>
+<td>4</td>
+<td>Entry size</td>
+<td>Total size of this entry in bytes. The next entry begins immediately after.</td>
+</tr>
+<tr>
+<td>HVP_Content</td>
+<td>E-4</td>
+<td>Content</td>
+<td>Either an <code>HVP_Dir_Content</code> or an <code>HVP_File_Content</code>, depending on the layout of these bytes.</td>
+</tr>
+</tbody>
+</table>
+<p>To tell directories from files: compute <code>name_len = Entry_size - 17</code>.
+If <code>name_len &gt; 0</code>, and the byte at offset <code>+16</code> from the entry start
+equals <code>name_len</code>, and the <code>name_len</code> bytes after it are all printable
+ASCII, the entry is a directory. Otherwise it's a file.</p>
+<h4 id="hvp_dir_content">HVP_Dir_Content</h4>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Size</th>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>???</td>
+<td>5</td>
+<td>???</td>
+<td>???</td>
+</tr>
+<tr>
+<td>uint32</td>
+<td>4</td>
+<td>Child count</td>
+<td>Number of <code>HVP_Entry</code> records that belong to this directory. Let's call it C.</td>
+</tr>
+<tr>
+<td>???</td>
+<td>3</td>
+<td>???</td>
+<td>???</td>
+</tr>
+<tr>
+<td>uint8</td>
+<td>1</td>
+<td>Name length</td>
+<td>Length of the directory name. Let's call it N. Equal to <code>Entry_size - 17</code>.</td>
+</tr>
+<tr>
+<td>char[N]</td>
+<td>N</td>
+<td>Name</td>
+<td>Directory name in ASCII. No null terminator.</td>
+</tr>
+<tr>
+<td>HVP_Entry[C]</td>
+<td>?</td>
+<td>Children</td>
+<td>The C entries immediately following this one are the directory's children.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="hvp_file_content">HVP_File_Content</h4>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Size</th>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>HVP_VARIANT</td>
+<td>4</td>
+<td>Variant tag</td>
+<td><code>0x00000001</code> for File entries.</td>
+</tr>
+<tr>
+<td>uint8</td>
+<td>1</td>
+<td>Is compressed</td>
+<td><code>0x01</code> if the blob is zlib-compressed, <code>0x00</code> if stored raw.</td>
+</tr>
+<tr>
+<td>uint32</td>
+<td>4</td>
+<td>Compressed size</td>
+<td>Size of the blob in the data section.</td>
+</tr>
+<tr>
+<td>uint32</td>
+<td>4</td>
+<td>Decompressed size</td>
+<td>Size of the file after decompression (equal to Compressed size if not compressed).</td>
+</tr>
+<tr>
+<td>int32</td>
+<td>4</td>
+<td>Checksum</td>
+<td><code>bytes_sum</code> of the compressed blob (see below).</td>
+</tr>
+<tr>
+<td>uint32</td>
+<td>4</td>
+<td>Offset</td>
+<td>Absolute file offset where the compressed blob starts.</td>
+</tr>
+<tr>
+<td>???</td>
+<td>3</td>
+<td>???</td>
+<td>Padding / reserved.</td>
+</tr>
+<tr>
+<td>uint8</td>
+<td>1</td>
+<td>Name length</td>
+<td>Length of the file name. Let's call it N.</td>
+</tr>
+<tr>
+<td>char[N]</td>
+<td>N</td>
+<td>Name</td>
+<td>File name (just the basename, not the full path). The full path is reconstructed by walking up through the parent directory entries.</td>
+</tr>
+</tbody>
+</table>
+<p>For more info on <code>HVP_VARIANT</code>, check
+<a href="../constants/#hvp_variant">this link</a>.</p>
+<p>The <code>bytes_sum</code> checksum is <em>not</em> a CRC. It is computed over the
+compressed bytes as follows:</p>
+<pre><code>sum = 0 (signed int32)
+for each 4-byte chunk in the blob, read as LE uint32:
+    sum = sum + chunk      // wrapping signed addition
+for each remaining byte (if length not a multiple of 4):
+    sum = sum + byte       // wrapping signed addition
+</code></pre>
+<p>The blob itself, when <code>Is compressed == 0x01</code>, is a standard zlib
+stream: a 2-byte header (<code>0x78 0xDA</code> for best compression — <code>0x78
+0x9C</code> is also accepted), followed by the deflate-compressed data,
+followed by a 4-byte adler32 in big-endian.</p>
+<h3 id="modifying-an-hvp">Modifying an HVP</h3>
+<p>To replace a file inside an HVP without rewriting the whole archive:</p>
+<ol>
+<li>Walk the TOC to find the target <code>HVP_File_Content</code> entry.</li>
+<li>Compress the new file with zlib and compute its <code>bytes_sum</code>
+   checksum.</li>
+<li>Append the new compressed blob to the end of the <code>.hvp</code> file.</li>
+<li>Overwrite the four fields in the TOC entry: <code>Compressed size</code>,
+   <code>Decompressed size</code>, <code>Checksum</code>, and <code>Offset</code>. The new <code>Offset</code>
+   is the position where you appended the blob.</li>
+<li>Recompute and write the <code>Entries CRC32</code> (bytes <code>[40..40+Data
+   offset]</code>) and then the <code>Header CRC32</code> (bytes <code>[0..31]</code>).</li>
+</ol>
+<p>The original blob's bytes remain in the file but become unreferenced.
+This append-at-EOF strategy works because the engine resolves files
+only through the TOC offset, never by scanning the data section.</p>
+<h2 id="lng-obscure">LNG (ObsCure)</h2>
+<p><code>.lng</code> is the localized-text format. Each language ships its own
+copy in <code>_texts/</code> (<code>en.lng</code>, <code>fr.lng</code>, <code>de.lng</code>, etc.). The format is
+a flat sequence of length-prefixed entries indexed by a 32-bit ID;
+the rest of the engine looks up strings by passing this ID.</p>
+<p>General structure of the <code>.lng</code> format (headers and lengths are in
+MSB; UTF-16 payloads are in LSB):</p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Size</th>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>???</td>
+<td>4</td>
+<td>???</td>
+<td>Padding / version field, usually zero.</td>
+</tr>
+<tr>
+<td>uint32</td>
+<td>4</td>
+<td>Entry count</td>
+<td>Number of <code>LNG_Entry</code> records that follow.</td>
+</tr>
+<tr>
+<td>LNG_Entry[]</td>
+<td>?</td>
+<td>Entries</td>
+<td>Sequence of entries.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="lng_entry">LNG_Entry</h3>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Size</th>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>uint32</td>
+<td>4</td>
+<td>ID</td>
+<td>Unique 32-bit identifier the engine uses to look up this string.</td>
+</tr>
+<tr>
+<td>uint32</td>
+<td>4</td>
+<td>Size</td>
+<td>Size of the payload that follows (the <code>Content</code> field). Let's call it L.</td>
+</tr>
+<tr>
+<td>LNG_Content</td>
+<td>L</td>
+<td>Content</td>
+<td>The string payload, either Windows-1252 or UTF-16 LE.</td>
+</tr>
+</tbody>
+</table>
+<p><code>LNG_Content</code> is a union of two encodings, distinguished by the first
+byte:</p>
+<ul>
+<li>If the first byte is <code>0x00</code>, the rest of the payload is a
+  Windows-1252 (8-bit Latin) string terminated by <code>0x00</code>.</li>
+<li>If the first byte is <code>0x01</code>, the second byte is a marker (<code>0x1C</code>)
+  and the rest of the payload is a UTF-16 LE string terminated by
+  <code>0x00 0x00</code>.</li>
+</ul>
+<p>For more info on <code>LNG_ENCODING</code>, check
+<a href="../constants/#lng_encoding">this link</a>.</p>
+<h4 id="lng_win1252_content">LNG_Win1252_Content</h4>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Size</th>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>LNG_ENCODING</td>
+<td>1</td>
+<td>Encoding flag</td>
+<td>Always <code>0x00</code>.</td>
+</tr>
+<tr>
+<td>char[?]</td>
+<td>?</td>
+<td>String</td>
+<td>Windows-1252 encoded text, null-terminated.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="lng_utf16_content">LNG_UTF16_Content</h4>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Size</th>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>LNG_ENCODING</td>
+<td>1</td>
+<td>Encoding flag</td>
+<td>Always <code>0x01</code>.</td>
+</tr>
+<tr>
+<td>uint8</td>
+<td>1</td>
+<td>Marker</td>
+<td>Always <code>0x1C</code>.</td>
+</tr>
+<tr>
+<td>uint16[?]</td>
+<td>?</td>
+<td>String</td>
+<td>UTF-16 LE codepoints, terminated by <code>0x0000</code>.</td>
+</tr>
+</tbody>
+</table>
+<p>Notes:</p>
+<ul>
+<li>A single <code>.lng</code> file may mix both encodings entry-by-entry.</li>
+<li>IDs are not necessarily contiguous and may be reused across files
+  for the same logical string.</li>
+<li>The engine renders strings through the bitmap font glyph table
+  (see below), so any codepoint used in a UTF-16 string must have a
+  corresponding glyph entry in the EXE's glyph table, otherwise it
+  renders as a blank or fallback glyph.</li>
+</ul>
+<h2 id="map-obscure">MAP (ObsCure)</h2>
+<p><code>.map</code> files live in <code>_common/</code> (e.g. <code>mapgen.map</code>, <code>mapb000.map</code>,
+<code>mapd100.map</code>). They describe room regions for navigation/level
+purposes. Each level group has its own <code>.map</code> file; <code>mapgen.map</code>
+covers the general overview map.</p>
+<p>General structure of the <code>.map</code> format (everything is in MSB):</p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Size</th>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>uint32</td>
+<td>4</td>
+<td>Entry count</td>
+<td>Number of <code>MAP_Entry</code> records that follow. Let's call it N.</td>
+</tr>
+<tr>
+<td>???</td>
+<td>4</td>
+<td>???</td>
+<td>Usually <code>0x00000000</code>.</td>
+</tr>
+<tr>
+<td>MAP_Entry[N]</td>
+<td>36*N</td>
+<td>Entries</td>
+<td>Per-room bounding box entries.</td>
+</tr>
+<tr>
+<td>???</td>
+<td>?</td>
+<td>???</td>
+<td>Trailing data not yet decoded; size varies per file.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="map_entry">MAP_Entry</h3>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Size</th>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>char[4]</td>
+<td>4</td>
+<td>Name</td>
+<td>Up to 4 ASCII characters, null-padded if shorter (e.g. <code>"M1\0\0"</code>, <code>"M001"</code>).</td>
+</tr>
+<tr>
+<td>float</td>
+<td>4</td>
+<td>X1</td>
+<td>Normalized left edge in <code>[0..1]</code>.</td>
+</tr>
+<tr>
+<td>float</td>
+<td>4</td>
+<td>Y1</td>
+<td>Normalized top edge in <code>[0..1]</code>.</td>
+</tr>
+<tr>
+<td>float</td>
+<td>4</td>
+<td>Z1</td>
+<td>Sentinel. <code>+Inf</code> (<code>0x7F800000</code>) for standard rooms; <code>-Inf</code> (<code>0xFF800000</code>) for container/group entries that visually overlap with other rooms.</td>
+</tr>
+<tr>
+<td>float</td>
+<td>4</td>
+<td>X2</td>
+<td>Normalized right edge in <code>[0..1]</code>.</td>
+</tr>
+<tr>
+<td>float</td>
+<td>4</td>
+<td>Y2</td>
+<td>Normalized bottom edge in <code>[0..1]</code>.</td>
+</tr>
+<tr>
+<td>float</td>
+<td>4</td>
+<td>Z2</td>
+<td>Sentinel. Always <code>+Inf</code> in the files examined.</td>
+</tr>
+<tr>
+<td>???</td>
+<td>8</td>
+<td>???</td>
+<td>Trailing zeros; possibly reserved.</td>
+</tr>
+</tbody>
+</table>
+<p>Example entries from <code>mapgen.map</code>:</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>X1</th>
+<th>Y1</th>
+<th>X2</th>
+<th>Y2</th>
+<th>Z1 sentinel</th>
+<th>Likely meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>M001</td>
+<td>0.5657</td>
+<td>0.1437</td>
+<td>0.7884</td>
+<td>0.3007</td>
+<td><code>+Inf</code></td>
+<td>A room.</td>
+</tr>
+<tr>
+<td>M100</td>
+<td>0.2886</td>
+<td>0.2435</td>
+<td>0.6290</td>
+<td>0.6249</td>
+<td><code>-Inf</code></td>
+<td>Container that groups several rooms.</td>
+</tr>
+<tr>
+<td>C0</td>
+<td>0.1656</td>
+<td>0.1404</td>
+<td>0.2633</td>
+<td>0.2706</td>
+<td><code>+Inf</code></td>
+<td>A room.</td>
+</tr>
+</tbody>
+</table>
+<p>Note that these bounding boxes do <em>not</em> control the room highlight
+rectangles shown on the in-game map screen (changing them has no
+visible effect on the highlights), so they are probably used for
+some other purpose — pathfinding, mini-map drawing, or
+player-position-to-room lookup. The semantic meaning of the short
+names (<code>M0</code>, <code>B0</code>, <code>C0</code>, etc.) and the layout of the trailing data
+have not yet been decoded.</p>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../events/" class="btn btn-neutral float-left" title="Events"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../hoelang/" class="btn btn-neutral float-right" title="HOE Language">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../events/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../hoelang/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "..";</script>
+    <script src="../js/theme_extra.js"></script>
+    <script src="../js/theme.js"></script>
+      <script src="../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

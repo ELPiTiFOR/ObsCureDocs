@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    <title>Binaries info - ObsCure Docs</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Binaries info";
+        var mkdocs_page_input_path = "binaries.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href=".." class="icon icon-home"> ObsCure Docs
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="..">Home</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../intro/">Introduction</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../items/">Items</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../events/">Events</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../formats/">File Formats</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../hoelang/">HOE Language</a>
+                </li>
+              </ul>
+              <ul class="current">
+                <li class="toctree-l1 current"><a class="reference internal current" href="#">Binaries info</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#obscure">ObsCure</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#font-glyph-table-obscureexe-data">Font glyph table (Obscure.exe data)</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#glyphslot">GlyphSlot</a>
+    </li>
+        </ul>
+    </li>
+    </ul>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../constants/">Constants & Types</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../about/">About</a>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">ObsCure Docs</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">Binaries info</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="binaries-info">Binaries info</h1>
+<p>This page documents data structures and tables embedded inside the
+game's compiled binaries (executables), as opposed to the standalone
+data files documented in the <a href="../formats/">File Formats</a> page.</p>
+<h2 id="obscure">ObsCure</h2>
+<h3 id="font-glyph-table-obscureexe-data">Font glyph table (Obscure.exe data)</h3>
+<p>The engine renders all text through pre-rendered bitmap font atlases
+in TGA form: <code>font_holstein16.tga</code>, <code>font_holstein18.tga</code>,
+<code>font_holstein24.tga</code>, and <code>font_holstein30.tga</code>. There are no TTF
+or OTF files anywhere in the game. Each glyph in those atlases is
+located via a lookup table embedded in <code>Obscure.exe</code>.</p>
+<p>The original table has 150 entries covering Windows-1252 printable
+characters. Two instructions in the engine reference it:</p>
+<ul>
+<li>File offset <code>0x05AB89</code> in <code>Obscure.exe</code> contains the table's
+  virtual address (4-byte immediate).</li>
+<li>File offset <code>0x05AB90</code> contains the entry count (4-byte
+  immediate).</li>
+</ul>
+<h3 id="glyphslot">GlyphSlot</h3>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Size</th>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>uint16</td>
+<td>2</td>
+<td>Codepoint</td>
+<td>Unicode codepoint that this slot represents.</td>
+</tr>
+<tr>
+<td>uint16</td>
+<td>2</td>
+<td>Atlas X</td>
+<td>Left edge of the glyph rectangle in the atlas (texture pixel coordinates).</td>
+</tr>
+<tr>
+<td>uint16</td>
+<td>2</td>
+<td>Atlas Y</td>
+<td>Top edge of the glyph rectangle in the atlas (texture pixel coordinates).</td>
+</tr>
+<tr>
+<td>uint16</td>
+<td>2</td>
+<td>Width</td>
+<td>Width of the glyph rectangle (how many texture pixels to read horizontally).</td>
+</tr>
+<tr>
+<td>uint16</td>
+<td>2</td>
+<td>Advance</td>
+<td>Pen advance after drawing this glyph. Combining marks use 0 here.</td>
+</tr>
+</tbody>
+</table>
+<p>The four font atlases share a single coordinate space — the same
+<code>Atlas X</code> / <code>Atlas Y</code> values are used by all four font files. In the
+versions examined this means all four atlas textures have identical
+pixel content.</p>
+<p>To add new glyphs (for example, to support a codepoint range outside
+Windows-1252) one approach is:</p>
+<ol>
+<li>Add a new PE section to <code>Obscure.exe</code> large enough to hold an
+   extended table.</li>
+<li>Write the extended <code>GlyphSlot[]</code> table inside the new section.</li>
+<li>Overwrite the 4-byte immediates at <code>0x05AB89</code> (VA) and <code>0x05AB90</code>
+   (count) to point at the new table.</li>
+<li>Pack the new glyphs into the existing atlas TGAs at any free
+   region. The atlas is hardcoded to <code>1024 x 1024</code> pixels — larger
+   atlases are rejected by the renderer.</li>
+</ol>
+<p>A separate table reference used by the <code>font_holstein30.tga</code>
+rendering path lives at a different code offset and must be
+redirected independently if the new table also serves that size.</p>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../hoelang/" class="btn btn-neutral float-left" title="HOE Language"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../constants/" class="btn btn-neutral float-right" title="Constants & Types">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../hoelang/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../constants/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "..";</script>
+    <script src="../js/theme_extra.js"></script>
+    <script src="../js/theme.js"></script>
+      <script src="../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    <title>Introduction - ObsCure Docs</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Introduction";
+        var mkdocs_page_input_path = "intro.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href=".." class="icon icon-home"> ObsCure Docs
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="..">Home</a>
+                </li>
+              </ul>
+              <ul class="current">
+                <li class="toctree-l1 current"><a class="reference internal current" href="#">Introduction</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#obscure">ObsCure</a>
+    </li>
+    </ul>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../items/">Items</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../events/">Events</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../formats/">File Formats</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../hoelang/">HOE Language</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../binaries/">Binaries info</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../constants/">Constants & Types</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../about/">About</a>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">ObsCure Docs</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">Introduction</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="introduction-to-modding-each-game">Introduction to modding each game</h1>
+<p>First of all, there are several versions of each game in the franchise, and they
+are all different in how they're coded and how their files work. We'll do our
+best to specify all the differences so that this documentation can be applied
+for any version.</p>
+<p>When installing any of the games in the franchise on your computer, you'll see a
+bunch of files, but let's focus on the most important ones:</p>
+<ul>
+<li>HVP files</li>
+<li>The executable file</li>
+</ul>
+<p>The files with the <code>.hvp</code> extension are packages that include a
+lot of game files such as dialogues, models, textures, cutscenes, rooms
+info, items info, etc. To read and modify these models, textures, etc, you
+need a tool to unpack the HVPs, to download such tools check
+<a href="https://obscurefans.com/tools.php">this link</a>. If you want a video
+tutorial, you can also check
+<a href="https://youtube.com/watch?v=iQymvq5d5nc">this link</a>. As a first step, I
+recommend unpacking the HVPs and store all the contents in some folder, as a
+sort of backup.</p>
+<p>A lot of the files inside the HVPs have a non-standard format, created by
+Hydravision or Mighty Rocket Studio to meet their needs, so a very important
+part of reverse engineering the game is figuring out these formats, so that we
+can read the files more easily, and so that we can modify them as we want. To
+check all the file formats that have already been reversed, check the
+<a href="../formats/">File Formats</a> sections.</p>
+<p>The executable file stores all the functions that are executed during the
+execution of the game. It is possible to modify it directly, but it's a hard
+task and requires abilities in reverse engineering. It's in x86 (32 bits) machine
+code, so in order to read it more easily you should use a disassembler such as
+Binary Ninja or Ghidra. The latter has the advantage of having a free
+decompiler, which makes everything even simpler. Listing all the functions
+and what they do, and documenting every structure used in-game would be a very
+interesting thing to add to this documentation.</p>
+<p>After explaining the most general concepts, let's dive into each one of the
+games.</p>
+<h2 id="obscure">ObsCure</h2>
+<p>Each version of ObsCure has different HVP files. For the Steam version, we have
+<code>cachpack.hvp</code>, <code>datapack.hvp</code>, <code>kinepack.hvp</code> and <code>strmpack.hvp</code>.</p>
+<p>The four HVP archives that ship with ObsCure (the first game) each
+hold a different category of data:</p>
+<table>
+<thead>
+<tr>
+<th>Archive</th>
+<th>Size (approx.)</th>
+<th>Contents</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>datapack.hvp</code></td>
+<td>~664 MB</td>
+<td>Main game content: text strings, scripts, models, textures, room data.</td>
+</tr>
+<tr>
+<td><code>cachpack.hvp</code></td>
+<td>~29 MB</td>
+<td>Preload cache textures (HUD, fonts, small icons).</td>
+</tr>
+<tr>
+<td><code>kinepack.hvp</code></td>
+<td>~1.1 GB</td>
+<td>Pre-rendered cutscene videos.</td>
+</tr>
+<tr>
+<td><code>strmpack.hvp</code></td>
+<td>~634 MB</td>
+<td>Streaming audio (voice lines, music).</td>
+</tr>
+</tbody>
+</table>
+<p>If you're translating text or replacing UI textures, the file you
+care about is almost always <code>datapack.hvp</code>. The HUD font atlas
+(<code>font_holstein16.tga</code>) lives in <code>cachpack.hvp</code>.</p>
+<p>For the full binary layout of HVP archives see the
+<a href="../formats/#hvp-obscure">HVP section</a>.</p>
+<p>Once you have located the HVPs, unpack them with a specialized tool.</p>
+<p>Once you have extracted the HVP files, you'll see a bunch of folders with
+names such as "_common", "_levels", etc, they all start with an underscore.
+It turns out you can make the game read the extracted files instead of the
+HVPs, that means that if you modify the extracted files and you make the
+game read them, you will play with the modified files.
+To do so, you need to move all those folders starting with an underscore
+to a new folder that you will name "data" and you will place said folder
+in the root directory of the game (so you will have the <code>data</code> folder and
+the <code>.exe</code> of the game in the same directory). You will also need to rename
+the HVP files so that the game can't find them. I suggest adding a "2" to
+their names so that you don't lose track of which HVP file is which. So
+for example <code>datapack.hvp</code> will become <code>datapack2.hvp</code>.</p>
+<p>Now that you have created the <code>data</code> folder (and renamed the HVPs), you can
+modify the files inside and run the game to check the changes by yourself. For
+example, if you modify the texture <code>data/_common/textures/boy1.bmp</code> while
+keeping the same format (to make sure the game can still read it) you'll see
+Stan will have a different appearance.</p>
+<p>When it comes to well known formats like <code>.bmp</code>, modifying them is not a
+challenge. But it's not the case for non-standard file formats like <code>.it</code> or
+<code>.tm</code>, for which you will need a specialized tool like
+<a href="https://www.nexusmods.com/obscure2/mods/4">Obscure Model Importer and Exporter</a>
+by Hydra or <a href="https://github.com/ELPiTiFOR/ObsCureFileParser">ObsCureFileParser</a>
+by ELPiTiFOR. To see a list of interesting tools check
+<a href="https://obscurefans.com/tools.php">this link</a>.</p>
+<p>If there is no tool or documentation for a specific format, don't hesitate to do
+some research on it and adding it to this documentation. To figure out the
+format of a file, I recommend using one of these approaches, or both:</p>
+<ul>
+<li>Reading the file with HxD or some other software that lets you see the
+hexadecimal representation of the bytes, looking for patterns, trying to modify
+the file, and running the game to see what changed</li>
+<li>Study the executable file, debugging the game, and trying to find the
+functions that read the file you're trying to study, then study those functions
+or decompile them to see how exactly the content of the file is interpreted.</li>
+</ul>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href=".." class="btn btn-neutral float-left" title="Home"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../items/" class="btn btn-neutral float-right" title="Items">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href=".." style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../items/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "..";</script>
+    <script src="../js/theme_extra.js"></script>
+    <script src="../js/theme.js"></script>
+      <script src="../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

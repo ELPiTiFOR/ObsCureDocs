@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    <title>Items - ObsCure Docs</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Items";
+        var mkdocs_page_input_path = "items.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href=".." class="icon icon-home"> ObsCure Docs
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="..">Home</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../intro/">Introduction</a>
+                </li>
+              </ul>
+              <ul class="current">
+                <li class="toctree-l1 current"><a class="reference internal current" href="#">Items</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#obscure">ObsCure</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#allitemsit">allitems.it</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#tm-files">.tm files</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#hidden-items">Hidden items</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#obscure-ii">ObsCure II</a>
+    </li>
+    </ul>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../events/">Events</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../formats/">File Formats</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../hoelang/">HOE Language</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../binaries/">Binaries info</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../constants/">Constants & Types</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../about/">About</a>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">ObsCure Docs</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">Items</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="items">Items</h1>
+<p>Items are objects scattered around the rooms of ObsCure, that can be picked up
+to add them to our inventories. Some are unique objects that are usually used
+for specific puzzles, like wheels or keys, while others are resources that help
+us survive during the whole adventure, like medkits or ammo. Let's explain how
+items work in each game.</p>
+<h2 id="obscure">ObsCure</h2>
+<p>All items have a type and a UID, the type of an item answers the question "What
+is it?". Is it a medkit? Is it a key? Is it a map? Is it a disc? The type will
+determine what we can do with the item, like healing a character, opening a
+door, picking a lock, etc. The UID answers the question "Which one is it?". It
+is a unique number that identifies a specific object among all items that can be
+picked up in the game.</p>
+<p>Let's take two different medkits as an example. On the one hand, the UID of the
+medkit in the room of the first queen is <code>0x063282</code>, and its type is <code>0x025F</code>,
+which corresponds to the medkit type. On the other hand, the UID of the one that
+can be found in the bathroom of the ground floor of the classrooms building is
+<code>0x030181</code>, and its type is also <code>0x025F</code>. As you can see, both medkits have the
+same type, but different unique identifiers.</p>
+<p>For an item to appear in a room, we need to define it in two different spots:
+the <code>allitems.it</code> file, and the <code>.tm</code> file of the room. Some data like the item
+type or its UID appear in both files, so the information given in said files
+must be coherent.</p>
+<h3 id="allitemsit">allitems.it</h3>
+<p>This file contains information on every single item in the game. For each one of
+them, it gives its type, its UID, some additional information that is only used
+for specific item types, a multiplier that is only truly used for ammunition,
+and the difficulties or modes in which the item can be found. Check
+<a href="../formats/#it">this link</a> to learn about the format used in this file.</p>
+<p>It doesn't specify, for example, the room in which the item can be found, as
+this is just a kind of catalog of items.</p>
+<h3 id="tm-files">.tm files</h3>
+<p>Each room has at least one <code>.tm</code> file, which gives information such as the
+camera angles, the NPCs, and the items that can be picked up inside. Check
+<a href="../formats/#tm">this link</a> to learn about this file format.</p>
+<h3 id="hidden-items">Hidden items</h3>
+<p>Hidden items are handled as an event, in the <code>.hoe</code> files, which store (among
+other things) scripts/bytecode. Some functions are called in order to hide the
+items, and they are given some <a href="../constants/#item_type_short">ITEM_TYPE_SHORT</a>
+and some Item UIDs as arguments so that they know which specific items are being
+hidden and what their types are.</p>
+<h2 id="obscure-ii">ObsCure II</h2>
+<p>WIP</p>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../intro/" class="btn btn-neutral float-left" title="Introduction"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../events/" class="btn btn-neutral float-right" title="Events">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../intro/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../events/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "..";</script>
+    <script src="../js/theme_extra.js"></script>
+    <script src="../js/theme.js"></script>
+      <script src="../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

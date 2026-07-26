@@ -1,0 +1,1028 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    <title>Constants & Types - ObsCure Docs</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Constants \u0026 Types";
+        var mkdocs_page_input_path = "constants.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href=".." class="icon icon-home"> ObsCure Docs
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="..">Home</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../intro/">Introduction</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../items/">Items</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../events/">Events</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../formats/">File Formats</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../hoelang/">HOE Language</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../binaries/">Binaries info</a>
+                </li>
+              </ul>
+              <ul class="current">
+                <li class="toctree-l1 current"><a class="reference internal current" href="#">Constants & Types</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#obscure">ObsCure</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#item_type">ITEM_TYPE</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#extra_info">EXTRA_INFO</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#diff_mode">DIFF_MODE</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#item_type_short">ITEM_TYPE_SHORT</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#room_id-and-room_id_short">ROOM_ID and ROOM_ID_SHORT</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#hvp_variant">HVP_VARIANT</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#lng_encoding">LNG_ENCODING</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#both-games">Both games</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#lstring">LString</a>
+    </li>
+        </ul>
+    </li>
+    </ul>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../about/">About</a>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">ObsCure Docs</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">Constants & Types</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="constants-and-identifiers">Constants and identifiers</h1>
+<h2 id="obscure">ObsCure</h2>
+<h3 id="item_type">ITEM_TYPE</h3>
+<p>Item types are encoded as uint32. Every value is left padded with zeros. Here's
+the list of all types:</p>
+<pre><code class="language-c">typedef enum
+{
+    NO_ITEM_ID = 0x0000,
+    WEAK_FLASHLIGHT = 0X00C9,
+    BAT = 0x00CA,
+    OLD_PISTOL = 0x00CB,
+    LASER = 0x00CC,
+    SHOTGUN = 0x00CE,
+    METAL_BAR = 0x00D1,
+    LIGHT_GRENADE = 0x00D2,
+    GUN_WITH_FLASHLIGHT = 0x00D3,
+    EMPTY_SLOT_ = 0x00D4,
+    YELLOW_FLASHLIGHT = 0x00D5,
+    POWERFUL_FLASHLIGHT = 0x00D6,
+    AUTOMATIC_PISTOL = 0x00D7,
+    REVOLVER = 0x00D8,
+    DOUBLE_BARREL_SHOTGUN = 0x00D9,
+    ALUMINIUM_BAT = 0x00DA,
+    LASER_GUN = 0x00DC,
+    SHOTGUN_AMMO = 0x0130,
+    HANDGUN_AMMO = 0x0132,
+    STATUETTE = 0x0191,
+    SAFE = 0x0192,
+    HOOK = 0x0194,
+    FUSES = 0x0195,
+    WOOD_PLANK = 0x0197,
+    NEEDLE = 0x0199,
+    SCREWDRIVER = 0x019A,
+    PIECE_OF_PAPER = 0x019B,
+    LEVER = 0x019C,
+    FILM = 0x01F5,
+    PHOTO = 0x01F6,
+    DOCUMENT = 0x01F7,
+    MAP = 0x01F8,
+    BASEMENT_PLAN = 0x01F9,
+    KEY = 0x0259,
+    DISC = 0x025A,
+    TAPE = 0x025B,
+    PLIERS = 0x025C,
+    WHEEL = 0x025E,
+    MEDKIT = 0x025F,
+    CELLPHONE = 0x0260,
+    VIDEO_TAPE = 0x0261,
+    REEL_OF_WIRE = 0x0263,
+    ENERGY_DRINK = 0x0264,
+} item_type;
+</code></pre>
+<h3 id="extra_info">EXTRA_INFO</h3>
+<p>Gives more information on documents, photos, maps and statuettes, encoded as
+uint32. Note that for maps we have letters, that's because the game uses their
+ASCII codes. All values are left padded with zeros.</p>
+<pre><code class="language-c">typedef enum
+{
+    STATUETTE_PRAYING = 0x01,
+    STATUETTE_BROKEN = 0x02,
+    STATUETTE_CROSS = 0x03,
+    STATUETTE_HANDS_BACK = 0x04,
+    PIECE_OF_PAPER_DOC = 0x020601,
+    BUILDING_OF_SCHOOL = 0x020800,
+    LEONARD_STATE = 0x020801,
+    LETTER_FROM_WALT_KERRIDAN = 0x020802,
+    THE_MORTIFILIA = 0x020803,
+    SUBJECT_22 = 0x020804,
+    SHOM_TRANSFORMATION_PHOTOS = 0x020805,
+    CENSORED_NEWSPAPER = 0x020806,
+    BASEMENT_PHOTOS = 0x020807,
+    PRESS_CLIPPINGS = 0x020808,
+    FIND_THE_SAFE = 0x020809,
+    TYPES_OF_MUTATION = 0x020810,
+    LETTER_FROM_WICKSON = 0x020811,
+    LETTER_TO_WICKSON = 0x020812,
+    BEAUTY_CLUB_ = 0x020813,
+    BASKETBALL_PROGRAMMEE_ = 0x020814,
+    PHOTO_TWINS = 0x020817,
+    EXPEDITION_DOCUMENTS = 0x020819,
+    EXPEDITION_PLAQUE = 0x020820,
+    NECROLOGY = 0x020821,
+    ALAN_DIARY = 0x020834,
+    EXPULSION_COMMUNITY = 0x020836,
+    ADMINISTRATION_MAP = 'B',
+    CLASSROOMS_MAP = 'C',
+    LIBRARY_MAP = 'D',
+    REFECTORY_MAP = 'E',
+    AMPHITHEATRE_MAP = 'F',
+    DORMITORY_MAP = 'I'
+} extra_info;
+</code></pre>
+<h3 id="diff_mode">DIFF_MODE</h3>
+<p>The DIFF_MODE is a value encoded as a uint8 (possibly extended to uint32 by
+left-padding with zeros) that tells us whether an item is present in specific
+difficulties and modes. Modes are "New Game" and "Special Mode". The DIFF_MODE
+is an integer where each one of the 4 least valuable bits are flags. Here are
+the flags and the weights of their bits:</p>
+<ul>
+<li>0: Easy difficulty</li>
+<li>1: Normal difficulty</li>
+<li>2: Hard difficulty</li>
+<li>3: Special Mode</li>
+</ul>
+<p>If a difficulty flag is set, the item shows up in that difficulty. As for the
+Special Mode flag, the only item that has it set to 1 is the laser gun, and its
+DIFF_MODE is <code>8</code>, so only the Special Mode flag is set, even though the gun
+appears in all difficulties (need to do more tests on this).</p>
+<p>More examples of DIFF_MODEs:</p>
+<ul>
+<li><code>0x7</code>: <code>0b111</code>, the item is shown in all difficulties</li>
+<li><code>0x4</code>: <code>0b100</code>, the item only shows up in Hard difficulty</li>
+<li><code>0x3</code>: <code>0b011</code>, the item shows up in Easy and Normal</li>
+</ul>
+<h3 id="item_type_short">ITEM_TYPE_SHORT</h3>
+<p>This is just another way to refer to each ITEM_TYPE, they are encoded as uint32
+even though they only take one byte, but they are left padded with zeros. They
+are used hide some items, for example.</p>
+<table>
+<thead>
+<tr>
+<th>ITEM_TYPE_SHORT</th>
+<th>Item</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>7A</td>
+<td>Shotgun ammo</td>
+</tr>
+<tr>
+<td>7B</td>
+<td>Handgun ammo</td>
+</tr>
+<tr>
+<td>66</td>
+<td>Bad quality flashlight</td>
+</tr>
+<tr>
+<td>67</td>
+<td>Yellow flashlight</td>
+</tr>
+<tr>
+<td>68</td>
+<td>Powerful flashlight</td>
+</tr>
+<tr>
+<td>CC</td>
+<td>Laser</td>
+</tr>
+<tr>
+<td>69</td>
+<td>Yellow bat</td>
+</tr>
+<tr>
+<td>6A</td>
+<td>Metal bar</td>
+</tr>
+<tr>
+<td>6B</td>
+<td>Aluminium bat</td>
+</tr>
+<tr>
+<td>6C</td>
+<td>Old pistol</td>
+</tr>
+<tr>
+<td>6D</td>
+<td>Automatic pistol</td>
+</tr>
+<tr>
+<td>6E</td>
+<td>Revolver</td>
+</tr>
+<tr>
+<td>6F</td>
+<td>Laser gun</td>
+</tr>
+<tr>
+<td>70</td>
+<td>Laser</td>
+</tr>
+<tr>
+<td>71</td>
+<td>Shotgun</td>
+</tr>
+<tr>
+<td>72</td>
+<td>Double barrel shotgun</td>
+</tr>
+<tr>
+<td>73</td>
+<td>Light grenade ?</td>
+</tr>
+<tr>
+<td>74</td>
+<td>Gun with flashlight</td>
+</tr>
+<tr>
+<td>A2</td>
+<td>Disc</td>
+</tr>
+<tr>
+<td>A3</td>
+<td>Sticky tape</td>
+</tr>
+<tr>
+<td>A6</td>
+<td>First aid kit</td>
+</tr>
+<tr>
+<td>AB</td>
+<td>Energy drink</td>
+</tr>
+<tr>
+<td>83</td>
+<td>Statuette</td>
+</tr>
+<tr>
+<td>84</td>
+<td>Safe (unused)</td>
+</tr>
+<tr>
+<td>85</td>
+<td>Hook (looks weird maybe?)</td>
+</tr>
+<tr>
+<td>86</td>
+<td>Box of fuses and fuse (unused?)</td>
+</tr>
+<tr>
+<td>87</td>
+<td>Wood plank</td>
+</tr>
+<tr>
+<td>88</td>
+<td>Paper cup</td>
+</tr>
+<tr>
+<td>89</td>
+<td>Compass Needle</td>
+</tr>
+<tr>
+<td>8A</td>
+<td>Screwdriver</td>
+</tr>
+<tr>
+<td>8B</td>
+<td>White image (?)</td>
+</tr>
+<tr>
+<td>8C</td>
+<td>Lever (looks weird maybe?)</td>
+</tr>
+<tr>
+<td>97</td>
+<td>“Filmrolle”</td>
+</tr>
+<tr>
+<td>9B</td>
+<td>Diary? (unused)</td>
+</tr>
+<tr>
+<td>A1</td>
+<td>Nothing (no blue box)</td>
+</tr>
+<tr>
+<td>A4</td>
+<td>Pliers</td>
+</tr>
+<tr>
+<td>A5</td>
+<td>Wheel</td>
+</tr>
+<tr>
+<td>A8</td>
+<td>Video tape</td>
+</tr>
+<tr>
+<td>AA</td>
+<td>Reel of wire</td>
+</tr>
+</tbody>
+</table>
+<h3 id="room_id-and-room_id_short">ROOM_ID and ROOM_ID_SHORT</h3>
+<p>These 2 types of constants identify a specific room in the game. ROOM_IDs are
+strings that start with a letter and end with 3 digits, while ROOM_ID_SHORTs
+are encoded as uint8. Here's a table with all these constants and the names of
+the rooms:</p>
+<table>
+<thead>
+<tr>
+<th>ROOM_ID_SHORT</th>
+<th>ROOM_ID</th>
+<th>English name and notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0x01</td>
+<td>a000</td>
+<td>The garden</td>
+</tr>
+<tr>
+<td>0x02</td>
+<td>a001</td>
+<td>The wood</td>
+</tr>
+<tr>
+<td>0x03</td>
+<td>a002</td>
+<td>The wood</td>
+</tr>
+<tr>
+<td>0x04</td>
+<td>a003</td>
+<td>The garden</td>
+</tr>
+<tr>
+<td>0x05</td>
+<td>a004</td>
+<td>The basement</td>
+</tr>
+<tr>
+<td>0x11</td>
+<td>b000</td>
+<td>Hall</td>
+</tr>
+<tr>
+<td>0x13</td>
+<td>b002</td>
+<td>Meeting room</td>
+</tr>
+<tr>
+<td>0x15</td>
+<td>b004</td>
+<td>Teacher's room</td>
+</tr>
+<tr>
+<td>0x16</td>
+<td>b005</td>
+<td>Girl's toilet</td>
+</tr>
+<tr>
+<td>0x17</td>
+<td>b006</td>
+<td>Boys' toilet</td>
+</tr>
+<tr>
+<td>0x18</td>
+<td>b007</td>
+<td>Toilets in the teacher's room.</td>
+</tr>
+<tr>
+<td>0x19</td>
+<td>b008</td>
+<td>Cafeteria</td>
+</tr>
+<tr>
+<td>0x1A</td>
+<td>b009</td>
+<td>Loft</td>
+</tr>
+<tr>
+<td>0x1B</td>
+<td>b100</td>
+<td>Loft</td>
+</tr>
+<tr>
+<td>0x1C</td>
+<td>b102</td>
+<td>Spanish classroom</td>
+</tr>
+<tr>
+<td>0x1D</td>
+<td>b103</td>
+<td>The filing room</td>
+</tr>
+<tr>
+<td>0x1E</td>
+<td>b104</td>
+<td>Boxroom in the filing room</td>
+</tr>
+<tr>
+<td>0x1F</td>
+<td>b106</td>
+<td>Teacher's room (1st floor)</td>
+</tr>
+<tr>
+<td>0x20</td>
+<td>b010</td>
+<td>Boxroom.</td>
+</tr>
+<tr>
+<td>0x31</td>
+<td>c000</td>
+<td>Corridor (ground floor)</td>
+</tr>
+<tr>
+<td>0x32</td>
+<td>c003</td>
+<td>Toilet</td>
+</tr>
+<tr>
+<td>0x33</td>
+<td>c004</td>
+<td>Boxroom</td>
+</tr>
+<tr>
+<td>0x34</td>
+<td>c006</td>
+<td>Physics/Chemistry lab</td>
+</tr>
+<tr>
+<td>0x35</td>
+<td>c009</td>
+<td>Maths/physics classroom</td>
+</tr>
+<tr>
+<td>0x36</td>
+<td>c010</td>
+<td>Administrative office</td>
+</tr>
+<tr>
+<td>0x37</td>
+<td>c011</td>
+<td>Staircase</td>
+</tr>
+<tr>
+<td>0x38</td>
+<td>c100</td>
+<td>Corridor (1st floor) [Classrooms]</td>
+</tr>
+<tr>
+<td>0x39</td>
+<td>c101</td>
+<td>Administrative office [Classrooms]</td>
+</tr>
+<tr>
+<td>0x3A</td>
+<td>c104</td>
+<td>Living languages classroom</td>
+</tr>
+<tr>
+<td>0x3B</td>
+<td>c105</td>
+<td>Biology classroom.</td>
+</tr>
+<tr>
+<td>0x3C</td>
+<td>c109</td>
+<td>Office or Mr. Friedman</td>
+</tr>
+<tr>
+<td>0x40</td>
+<td>d001</td>
+<td>Meeting room</td>
+</tr>
+<tr>
+<td>0x41</td>
+<td>d000</td>
+<td>Corridor (ground floor)</td>
+</tr>
+<tr>
+<td>0x42</td>
+<td>d002</td>
+<td>Friedman's Hideaway</td>
+</tr>
+<tr>
+<td>0x43</td>
+<td>d003</td>
+<td>Library (ground floor)</td>
+</tr>
+<tr>
+<td>0x44</td>
+<td>d004</td>
+<td>Maths/physics classroom</td>
+</tr>
+<tr>
+<td>0x45</td>
+<td>d005</td>
+<td>Boy's toilet</td>
+</tr>
+<tr>
+<td>0x46</td>
+<td>d006</td>
+<td>Girl's toilet</td>
+</tr>
+<tr>
+<td>0x47</td>
+<td>d009</td>
+<td>Living languages classroom</td>
+</tr>
+<tr>
+<td>0x48</td>
+<td>d100</td>
+<td>Corridor (1st floor) [Library]</td>
+</tr>
+<tr>
+<td>0x49</td>
+<td>d101</td>
+<td>Biology room 2 [Library]</td>
+</tr>
+<tr>
+<td>0x4A</td>
+<td>d102</td>
+<td>Abandoned classroom</td>
+</tr>
+<tr>
+<td>0x4B</td>
+<td>d103</td>
+<td>History classroom</td>
+</tr>
+<tr>
+<td>0x4C</td>
+<td>d104</td>
+<td>Living languages classroom [Library]</td>
+</tr>
+<tr>
+<td>0x4D</td>
+<td>d105</td>
+<td>Staircase</td>
+</tr>
+<tr>
+<td>0x4E</td>
+<td>d106</td>
+<td>Mezzanine (library)</td>
+</tr>
+<tr>
+<td>0x4F</td>
+<td>d010</td>
+<td>Secretary's Office</td>
+</tr>
+<tr>
+<td>0x51</td>
+<td>e000</td>
+<td>Dining hall (ground floor)</td>
+</tr>
+<tr>
+<td>0x52</td>
+<td>e001</td>
+<td>Janitor's room</td>
+</tr>
+<tr>
+<td>0x53</td>
+<td>e002</td>
+<td>Kitchen (ground floor)</td>
+</tr>
+<tr>
+<td>0x54</td>
+<td>e003</td>
+<td>Video surveillance room</td>
+</tr>
+<tr>
+<td>0x55</td>
+<td>e100</td>
+<td>Dining hall (1st floor)</td>
+</tr>
+<tr>
+<td>0x56</td>
+<td>e101</td>
+<td>Kitchen (1st floor)</td>
+</tr>
+<tr>
+<td>0x57</td>
+<td>e102</td>
+<td>Teachers' dining hall</td>
+</tr>
+<tr>
+<td>0x58</td>
+<td>e103</td>
+<td>Sick bay</td>
+</tr>
+<tr>
+<td>0x61</td>
+<td>f000</td>
+<td>Amphitheatre hall</td>
+</tr>
+<tr>
+<td>0x62</td>
+<td>f001</td>
+<td>Actors' room (ground floor)</td>
+</tr>
+<tr>
+<td>0x63</td>
+<td>f002</td>
+<td>Artists' entrance</td>
+</tr>
+<tr>
+<td>0x64</td>
+<td>f003</td>
+<td>Amphitheatre</td>
+</tr>
+<tr>
+<td>0x65</td>
+<td>f101</td>
+<td>Props room (1st floor)</td>
+</tr>
+<tr>
+<td>0x66</td>
+<td>f102</td>
+<td>Projection room</td>
+</tr>
+<tr>
+<td>0x71</td>
+<td>g000</td>
+<td>Corridor</td>
+</tr>
+<tr>
+<td>0x72</td>
+<td>g001</td>
+<td>Laboratory 1</td>
+</tr>
+<tr>
+<td>0x73</td>
+<td>g002</td>
+<td>Guinea pig room 1</td>
+</tr>
+<tr>
+<td>0x74</td>
+<td>g003</td>
+<td>Guinea pig room 2</td>
+</tr>
+<tr>
+<td>0x75</td>
+<td>g004</td>
+<td>Prison</td>
+</tr>
+<tr>
+<td>0x76</td>
+<td>g005</td>
+<td>Laboratory 1</td>
+</tr>
+<tr>
+<td>0x77</td>
+<td>g006</td>
+<td>Corridor</td>
+</tr>
+<tr>
+<td>0x78</td>
+<td>g007</td>
+<td>Greenhouse 1</td>
+</tr>
+<tr>
+<td>0x79</td>
+<td>g008</td>
+<td>Room with the door</td>
+</tr>
+<tr>
+<td>0x7A</td>
+<td>g009</td>
+<td>Prison</td>
+</tr>
+<tr>
+<td>0x7B</td>
+<td>g010</td>
+<td>Boiler room</td>
+</tr>
+<tr>
+<td>0x7C</td>
+<td>g012</td>
+<td>Corridor [F shape]</td>
+</tr>
+<tr>
+<td>0x7D</td>
+<td>g013</td>
+<td>Corridor [red light and roots]</td>
+</tr>
+<tr>
+<td>0x7E</td>
+<td>g100</td>
+<td>Main corridor [3 homms]</td>
+</tr>
+<tr>
+<td>0x7F</td>
+<td></td>
+<td>Nursery??? [doesn't work]</td>
+</tr>
+<tr>
+<td>0x80</td>
+<td>g103</td>
+<td>Cell [Lever]</td>
+</tr>
+<tr>
+<td>0x81</td>
+<td>g104</td>
+<td>Greenhouse 2</td>
+</tr>
+<tr>
+<td>0x82</td>
+<td>g105</td>
+<td>Machine room</td>
+</tr>
+<tr>
+<td>0x83</td>
+<td>g106</td>
+<td>Corridor [after Prison]</td>
+</tr>
+<tr>
+<td>0x84</td>
+<td>g107</td>
+<td>Store</td>
+</tr>
+<tr>
+<td>0x85</td>
+<td>g014</td>
+<td>Experimentation room</td>
+</tr>
+<tr>
+<td>0x86</td>
+<td>g015</td>
+<td>Cell</td>
+</tr>
+<tr>
+<td>0x87</td>
+<td>g016</td>
+<td>Corridor [Basement]</td>
+</tr>
+<tr>
+<td>0xA1</td>
+<td>i000</td>
+<td>Corridor</td>
+</tr>
+<tr>
+<td>0xA2</td>
+<td>i001</td>
+<td>Waiting room [Dormitory]</td>
+</tr>
+<tr>
+<td>0xA3</td>
+<td>i002</td>
+<td>Study room [Dormitory]</td>
+</tr>
+<tr>
+<td>0xA4</td>
+<td>i004</td>
+<td>Boys' toilet</td>
+</tr>
+<tr>
+<td>0xA5</td>
+<td>i007</td>
+<td>Dormitory</td>
+</tr>
+<tr>
+<td>0xA7</td>
+<td>i100</td>
+<td>Corridor [1st floor Dorm]</td>
+</tr>
+<tr>
+<td>0xA8</td>
+<td>i101</td>
+<td>Dormitory [1st floor]</td>
+</tr>
+<tr>
+<td>0xA9</td>
+<td>i102</td>
+<td>Supervisor's room 1</td>
+</tr>
+<tr>
+<td>0xAA</td>
+<td>i103</td>
+<td>Supervisor's room 2</td>
+</tr>
+<tr>
+<td>0xAB</td>
+<td>i107</td>
+<td>Dormitory [1st floor]</td>
+</tr>
+<tr>
+<td>0xB1</td>
+<td>j000</td>
+<td>Sports room</td>
+</tr>
+<tr>
+<td>0xB2</td>
+<td>j001</td>
+<td>Cloakrooms</td>
+</tr>
+<tr>
+<td>0xC1</td>
+<td>m000</td>
+<td>Central Courtyard (ground floor)</td>
+</tr>
+<tr>
+<td>0xC2</td>
+<td>m001</td>
+<td>Parking</td>
+</tr>
+<tr>
+<td>0xC3</td>
+<td>m002</td>
+<td>Exterior</td>
+</tr>
+<tr>
+<td>0xC4</td>
+<td>m003</td>
+<td>Gym courtyard</td>
+</tr>
+<tr>
+<td>0xC5</td>
+<td>m100</td>
+<td>Central Courtyard (1st floor)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="hvp_variant">HVP_VARIANT</h3>
+<p>Distinguishes the kind of entry inside an HVP TOC. Encoded as a uint32
+in MSB. Only one value is known and used:</p>
+<pre><code class="language-c">typedef enum
+{
+    HVP_VARIANT_FILE = 0x00000001,
+} hvp_variant;
+</code></pre>
+<p>Directory entries do not use this field at all (they are detected
+structurally — see <a href="../formats/#hvp_entry">HVP_Entry</a>).</p>
+<h3 id="lng_encoding">LNG_ENCODING</h3>
+<p>Selects between the two text encodings inside an <code>.lng</code> entry. Encoded
+as a uint8. Always followed by encoding-specific bytes.</p>
+<pre><code class="language-c">typedef enum
+{
+    LNG_ENCODING_WIN1252 = 0x00,
+    LNG_ENCODING_UTF16   = 0x01,
+} lng_encoding;
+</code></pre>
+<p>When the encoding is <code>LNG_ENCODING_UTF16</code>, the very next byte is a
+fixed marker (<code>0x1C</code>) before the UTF-16 LE codepoints begin.</p>
+<h2 id="both-games">Both games</h2>
+<h3 id="lstring">LString</h3>
+<p>LStrings are just strings that tell you how long they are. Even though we're
+calling it "string", it is NOT null terminated. Here's their format:</p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Size</th>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>uint32</td>
+<td>4</td>
+<td>Length</td>
+<td>Length of the string in MSB. Let's call it L.</td>
+</tr>
+<tr>
+<td>uint8[]</td>
+<td>L</td>
+<td>Content</td>
+<td>The string.</td>
+</tr>
+</tbody>
+</table>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../binaries/" class="btn btn-neutral float-left" title="Binaries info"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../about/" class="btn btn-neutral float-right" title="About">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../binaries/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../about/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "..";</script>
+    <script src="../js/theme_extra.js"></script>
+    <script src="../js/theme.js"></script>
+      <script src="../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,924 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    <title>HOE Language - ObsCure Docs</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "HOE Language";
+        var mkdocs_page_input_path = "hoelang.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href=".." class="icon icon-home"> ObsCure Docs
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="..">Home</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../intro/">Introduction</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../items/">Items</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../events/">Events</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../formats/">File Formats</a>
+                </li>
+              </ul>
+              <ul class="current">
+                <li class="toctree-l1 current"><a class="reference internal current" href="#">HOE Language</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#hoelang-main-structure">Hoelang Main structure</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#if_then-structure">If_Then Structure</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#block">Block</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#expression">Expression</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#variable-0x01">Variable (0x01)</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#hoe-vars-0x02">HOE vars (0x02)</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#unknown-value-type-0x03">Unknown value type (0x03)</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#function-call-0x04">Function call (0x04)</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#special-function-call-0x06">Special function call ? (0x06)</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#examples">Examples</a>
+    </li>
+    </ul>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../binaries/">Binaries info</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../constants/">Constants & Types</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../about/">About</a>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">ObsCure Docs</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">HOE Language</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="the-hoe-language">The HOE language</h1>
+<p>The events in HOE files include code in a binary non standard language, let's
+call it "the HOE language" or "hoelang". There are some details about the format
+that are still unknown, some things might be explained in a weird way because
+there is no better way to explain it yet. More researches are needed. Note that
+everything is written in Big endian, meaning the Most Significant Byte comes
+at last.</p>
+<p>The binary code starts with a 4 byte integer, which can be 0 or 1. Depending on
+this number, the start of the code looks different.</p>
+<p>If there's a 0, you have the following structure.</p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Size</th>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>uint32 (0x00)</td>
+<td>4</td>
+<td>First number</td>
+<td>Tells you if there's a Mask structure at the start</td>
+</tr>
+<tr>
+<td>Main</td>
+<td></td>
+<td>Main structure</td>
+<td>The Main structure of the Hoelang code (see below)</td>
+</tr>
+</tbody>
+</table>
+<p>If you have a 1, you have some additional stuff before the Main structure:</p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Size</th>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>uint32 (0x01)</td>
+<td>4</td>
+<td>First number</td>
+<td>Tells you if there's a Mask structure at the start</td>
+</tr>
+<tr>
+<td>LString</td>
+<td></td>
+<td>Mask name</td>
+<td>It just says "Mask"</td>
+</tr>
+<tr>
+<td>uint32</td>
+<td>4</td>
+<td>??? nb_uk_ints</td>
+<td>??? The number of integers that are coming</td>
+</tr>
+<tr>
+<td>uint32[nb_uk_ints]</td>
+<td></td>
+<td>uk_ints</td>
+<td>Unknown integers</td>
+</tr>
+<tr>
+<td>uint32</td>
+<td>4</td>
+<td>??? nb_m1</td>
+<td>??? The number of -1s that are coming</td>
+</tr>
+<tr>
+<td>uint32[nb_m1]</td>
+<td></td>
+<td>m1</td>
+<td>Just minus ones? <code>0xFF FF FF FF</code></td>
+</tr>
+<tr>
+<td>uint32</td>
+<td>4</td>
+<td>??? number1</td>
+<td>??? Some number</td>
+</tr>
+<tr>
+<td>uint32</td>
+<td>4</td>
+<td>??? number2</td>
+<td>??? Some number</td>
+</tr>
+<tr>
+<td>Block</td>
+<td></td>
+<td>??? Block</td>
+<td>??? Just a block (see Block below)</td>
+</tr>
+<tr>
+<td>uint32</td>
+<td>4</td>
+<td>??? number3</td>
+<td>??? Some number</td>
+</tr>
+<tr>
+<td>Expression</td>
+<td></td>
+<td>??? Expression</td>
+<td>??? Just an expression (see Expression below)</td>
+</tr>
+<tr>
+<td>Main</td>
+<td></td>
+<td>Main structure</td>
+<td>The Main structure of the Hoelang code (see Main structure below)</td>
+</tr>
+</tbody>
+</table>
+<p>In these tables some types of structures are mentioned, like Block, Expression,
+or Main structure, so let's explain these structures.</p>
+<h2 id="hoelang-main-structure">Hoelang Main structure</h2>
+<p>The main structure of Hoelang codes is the following:</p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Size</th>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>uint32</td>
+<td>4</td>
+<td>Nb_blocks</td>
+<td>Number of blocks</td>
+</tr>
+<tr>
+<td>Block[Nb_blocks]</td>
+<td></td>
+<td>Blocks</td>
+<td>The number of starting blocks</td>
+</tr>
+<tr>
+<td>uint32</td>
+<td>4</td>
+<td>Nb_If_Thens</td>
+<td>The number of If_Thens in the infinite loop</td>
+</tr>
+<tr>
+<td>If_Then[Nb_If_Thens]</td>
+<td></td>
+<td>If_Thens</td>
+<td>A sequence of If_Thens that are executed in an infinite loop</td>
+</tr>
+</tbody>
+</table>
+<p>Basically they start with a sequence of blocks ("starting blocks") that are
+executed once, then a sequence of If_Thens that are executed in a loop. You have
+to imagine this main structure like this C code:</p>
+<pre><code class="language-c">int main()
+{
+    execute_blocks();
+    while (1)
+    {
+        execute_if_thens();
+    }
+    return 0;
+}
+</code></pre>
+<p>In order to exit the while loop, the function <code>NoMoreUpdate()</code> needs to be
+called (you will learn how functions are called later in this page).</p>
+<h2 id="if_then-structure">If_Then Structure</h2>
+<p>These structures let us execute certain parts of the code only if some
+conditions are met. The syntax slightly varies depending of the type of If_Then
+Structure. The type is determined by the first 1 byte number. If the first
+number (HOE_IF_TYPE) is <code>0x01</code> the structure is the following:</p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Size</th>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>HOE_IF_TYPE (0x01)</td>
+<td>1</td>
+<td>If type</td>
+<td>Tells you what's inside of the Then</td>
+</tr>
+<tr>
+<td>uint32</td>
+<td>4</td>
+<td>If_nb_blocks</td>
+<td>The number of blocks inside the If</td>
+</tr>
+<tr>
+<td>Block[If_nb_blocks]</td>
+<td></td>
+<td>If blocks</td>
+<td>A sequence of blocks, each being a condition in the If</td>
+</tr>
+<tr>
+<td>uint32</td>
+<td>4</td>
+<td>Then_nb_blocks</td>
+<td>The number of blocks inside the Then</td>
+</tr>
+<tr>
+<td>Block[Then_nb_blocks]</td>
+<td></td>
+<td>Then blocks</td>
+<td>A sequence of blocks, each being executed in the Then</td>
+</tr>
+</tbody>
+</table>
+<p>If the first number is <code>0x02</code> the structure is the following:</p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Size</th>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>HOE_IF_TYPE (0x02)</td>
+<td>1</td>
+<td>If type</td>
+<td>Tells you what's inside of the Then</td>
+</tr>
+<tr>
+<td>uint32</td>
+<td>4</td>
+<td>If_nb_blocks</td>
+<td>The number of blocks inside the If</td>
+</tr>
+<tr>
+<td>Block[If_nb_blocks]</td>
+<td></td>
+<td>If blocks</td>
+<td>A sequence of blocks, each being a condition in the If</td>
+</tr>
+<tr>
+<td>uint32</td>
+<td>4</td>
+<td>Then_nb_If_Thens</td>
+<td>The number of If_Thens inside the Then</td>
+</tr>
+<tr>
+<td>If_Then[Then_nb_If_Thens]</td>
+<td></td>
+<td>Then If_Thens</td>
+<td>A sequence of If_Thens, each being executed in the Then</td>
+</tr>
+</tbody>
+</table>
+<p>As you can see the only difference is that when the HOE_IF_TYPE is 2, the Then
+is a sequence of If_Thens instead of a sequence of Blocks. So the If_Thens of
+type 2 let you have more conditions inside the Then, something like this:</p>
+<pre><code class="language-c">if (a)
+{ // then
+    if (b)
+    { // then
+        /* ... */
+    }
+}
+</code></pre>
+<p>Also note that all the conditions inside the If must be met to execute the Then,
+so you should imagine that there's an AND logical operator between the
+conditions in the If.</p>
+<h2 id="block">Block</h2>
+<p>A block basically lets you to assign a value to a variable, or compare two
+expressions. For all OP codes except <code>0xC9</code> it has the following syntax:</p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Size</th>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>HOE_OP_CODE</td>
+<td>4</td>
+<td>Block OP code</td>
+<td>Tells you what type of operation must be done.</td>
+</tr>
+<tr>
+<td>uint32</td>
+<td>4</td>
+<td>Not boolean</td>
+<td>Can be 0 or 1. If 1, the NOT logical operator is applied.</td>
+</tr>
+<tr>
+<td>Expression</td>
+<td></td>
+<td>Expression 1</td>
+<td>First operand.</td>
+</tr>
+<tr>
+<td>Expression</td>
+<td></td>
+<td>Expression 2</td>
+<td>Second operand.</td>
+</tr>
+</tbody>
+</table>
+<p>For the <code>0xC9</code> OP code, we only have one operand:</p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Size</th>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>HOE_OP_CODE (0xC9)</td>
+<td>4</td>
+<td>Block OP code</td>
+<td>Tells you what type of operation must be done.</td>
+</tr>
+<tr>
+<td>uint32</td>
+<td>4</td>
+<td>Not boolean</td>
+<td>Can be 0 or 1. If 1, the NOT logical operator is applied.</td>
+</tr>
+<tr>
+<td>Expression</td>
+<td></td>
+<td>Expression</td>
+<td>Operand.</td>
+</tr>
+</tbody>
+</table>
+<p>Here's the list of the different OP codes:</p>
+<table>
+<thead>
+<tr>
+<th>HOE_OP_CODE</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0xD0</td>
+<td>Assign</td>
+</tr>
+<tr>
+<td>0xCA</td>
+<td>Equal comparison</td>
+</tr>
+<tr>
+<td>0xCB</td>
+<td>Not equal comparison</td>
+</tr>
+<tr>
+<td>0xCC</td>
+<td>Greater than comparison</td>
+</tr>
+<tr>
+<td>0xCD</td>
+<td>Lower than comparison</td>
+</tr>
+<tr>
+<td>0xCE</td>
+<td>Greater or equal comparison</td>
+</tr>
+<tr>
+<td>0xCF</td>
+<td>Lower or equal comparison</td>
+</tr>
+<tr>
+<td>0xC9</td>
+<td>Convert to boolean (?)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="expression">Expression</h2>
+<p>Expressions represent a value (when I type "value" with a lowercase 'v' I mean
+the common word, when I type "Value" with an uppercase 'V' I mean the Value
+structure). Depending on the first number (let's call it Expression OP code),
+they have a different format. Here's a list of them:</p>
+<table>
+<thead>
+<tr>
+<th>HOE_EXPR_OP_CODE</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0x65</td>
+<td>Some value</td>
+</tr>
+<tr>
+<td>0x66</td>
+<td>Addition</td>
+</tr>
+<tr>
+<td>0x67</td>
+<td>Subtraction</td>
+</tr>
+<tr>
+<td>0x68</td>
+<td>Multiplication</td>
+</tr>
+<tr>
+<td>0x69</td>
+<td>Division</td>
+</tr>
+<tr>
+<td>0x6A</td>
+<td>Modulo</td>
+</tr>
+</tbody>
+</table>
+<p>For all these codes except Value (0x65), the syntax is the following:</p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Size</th>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>HOE_EXPR_OP_CODE</td>
+<td>4</td>
+<td>Expression OP code</td>
+<td>Tells you how the value is determined</td>
+</tr>
+<tr>
+<td>Value</td>
+<td></td>
+<td>Value 1</td>
+<td>First operand</td>
+</tr>
+<tr>
+<td>Value</td>
+<td></td>
+<td>Value 2</td>
+<td>Second operand</td>
+</tr>
+</tbody>
+</table>
+<p>For the 0x65 Expression we have this format:</p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Size</th>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>HOE_EXPR_OP_CODE</td>
+<td>4</td>
+<td>Expression OP code</td>
+<td>Tells you how the value is determined</td>
+</tr>
+<tr>
+<td>Value</td>
+<td></td>
+<td>Value</td>
+<td>The value</td>
+</tr>
+</tbody>
+</table>
+<p>The Value can be retrieved in different ways depending on the second number (the
+one after the <code>0x65</code>). Note that these Values don't have the OP code, they start
+with the second number. If that's confusing, check the examples
+<a href="#examples">below</a>. Here's a list of the different types of Value:</p>
+<table>
+<thead>
+<tr>
+<th>HOE_VALUE_TYPE</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0x01</td>
+<td>Variable</td>
+</tr>
+<tr>
+<td>0x02</td>
+<td>HOE_Var (these are actually constants)</td>
+</tr>
+<tr>
+<td>0x03</td>
+<td>Unknown type of value</td>
+</tr>
+<tr>
+<td>0x04</td>
+<td>Function call</td>
+</tr>
+<tr>
+<td>0x06</td>
+<td>Some special function call?</td>
+</tr>
+</tbody>
+</table>
+<p>Depending on the type of Value we have different formats.</p>
+<h3 id="variable-0x01">Variable (0x01)</h3>
+<p>These types of variables are defined inside of the code. They have an index, so
+the first variable has an index of <code>0</code>, the next one has an index of <code>1</code>, and
+so on. Variables have actually names, the names can be retrieved with the index
+and the LStrings in the HOE event, but the method to retrieve the name is
+unknown (the index does not just represent the index of the name in the LStrings
+list, that would be too easy). Here's the format of an Expression of type 0x65
+(Value), with a Value type 0x01 (variable), with an index of "Variable index":</p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Size</th>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>HOE_EXPR_OP_CODE (0x65)</td>
+<td>4</td>
+<td>Expression OP code</td>
+<td></td>
+</tr>
+<tr>
+<td>HOE_VALUE_TYPE (0x01)</td>
+<td>4</td>
+<td>Type of value</td>
+<td></td>
+</tr>
+<tr>
+<td>uint32</td>
+<td>4</td>
+<td>Variable index</td>
+<td>Tells you the index of the variable</td>
+</tr>
+</tbody>
+</table>
+<h3 id="hoe-vars-0x02">HOE vars (0x02)</h3>
+<p>These are refered to in the documentation as "HOE Vars", but they're actually
+not variables, they're constants. They are defined in the "Vars" field of the
+HOE Events. To sum it up, each HOE event has a list of constants, each can be
+an integer or a float, these are the "HOE Vars". In the code, each HOE Var is
+referred to by its index in the list. So here's the format of an Expression of
+type 0x65 (Value), with a Value of type 0x02 (HOE Var), with an index of "HOE
+Var index":</p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Size</th>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>HOE_EXPR_OP_CODE (0x65)</td>
+<td>4</td>
+<td>Expression OP code</td>
+<td></td>
+</tr>
+<tr>
+<td>HOE_VALUE_TYPE (0x02)</td>
+<td>4</td>
+<td>Type of value</td>
+<td></td>
+</tr>
+<tr>
+<td>uint32</td>
+<td>4</td>
+<td>HOE Var index</td>
+<td>Tells you the index of the HOE Var</td>
+</tr>
+</tbody>
+</table>
+<h3 id="unknown-value-type-0x03">Unknown value type (0x03)</h3>
+<p>It is unknown what these represent, but they have more or less the same format
+as the previous two types of Value:</p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Size</th>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>HOE_EXPR_OP_CODE (0x65)</td>
+<td>4</td>
+<td>Expression OP code</td>
+<td></td>
+</tr>
+<tr>
+<td>HOE_VALUE_TYPE (0x03)</td>
+<td>4</td>
+<td>Type of value</td>
+<td></td>
+</tr>
+<tr>
+<td>uint32</td>
+<td>4</td>
+<td>??? Some number</td>
+<td>???</td>
+</tr>
+</tbody>
+</table>
+<h3 id="function-call-0x04">Function call (0x04)</h3>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Size</th>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>HOE_EXPR_OP_CODE (0x65)</td>
+<td>4</td>
+<td>Expression OP code</td>
+<td></td>
+</tr>
+<tr>
+<td>HOE_VALUE_TYPE (0x04)</td>
+<td>4</td>
+<td>Type of value</td>
+<td></td>
+</tr>
+<tr>
+<td>LString</td>
+<td></td>
+<td>Function name</td>
+<td>The length of the name, and then the name</td>
+</tr>
+<tr>
+<td>uint32</td>
+<td>4</td>
+<td>Nb_args</td>
+<td>Number of arguments the function takes</td>
+</tr>
+<tr>
+<td>HOE_Function_Arg[Nb_args]</td>
+<td></td>
+<td>Arguments</td>
+<td>The arguments given to the function</td>
+</tr>
+</tbody>
+</table>
+<p>The HOE_Function_Arg has a different format depending on the first number, which
+is a 1 byte number that can take the following values:</p>
+<table>
+<thead>
+<tr>
+<th>HOE_ARG_TYPE</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0x01</td>
+<td>Immediate argument</td>
+</tr>
+<tr>
+<td>0x02</td>
+<td>HOE_Var</td>
+</tr>
+</tbody>
+</table>
+<p>In case it's an Immediate argument, we have this format:</p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Size</th>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>HOE_ARG_TYPE (0x01)</td>
+<td>1</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>uint32</td>
+<td>4</td>
+<td>Immediate argument</td>
+<td>The argument as an immediate value</td>
+</tr>
+</tbody>
+</table>
+<p>In case it's a HOE Var, we have this format:</p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Size</th>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>HOE_ARG_TYPE (0x02)</td>
+<td>1</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Expression</td>
+<td></td>
+<td>Expression argument</td>
+<td>The argument as an Expression</td>
+</tr>
+</tbody>
+</table>
+<h3 id="special-function-call-0x06">Special function call ? (0x06)</h3>
+<p>It has the same exact format as the Function call (0x04), but uses <code>0x06</code>
+instead of <code>0x04</code>. It might represent something else like the creation of a
+structure or class or something, more researchs is needed.</p>
+<h2 id="examples">Examples</h2>
+<p>Here's an example of what an Expression of type Function call looks like:</p>
+<p><img alt="Example of a HOE file from the game" src="../images/HOE%20function%20call%20example%20e103_hoe.png" /></p>
+<p>Here's an example of what an Assign Block and an Addition Expression look like:</p>
+<p><img alt="Example of another HOE file from the game" src="../images/HOE%20assign%20and%20addition%20example%20a003_hoe.png" /></p>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../formats/" class="btn btn-neutral float-left" title="File Formats"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../binaries/" class="btn btn-neutral float-right" title="Binaries info">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../formats/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../binaries/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "..";</script>
+    <script src="../js/theme_extra.js"></script>
+    <script src="../js/theme.js"></script>
+      <script src="../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>
