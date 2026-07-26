@@ -5,6 +5,7 @@ nav:
   - Items: items.md
   - Events: events.md
   - File Formats: formats.md
+  - HOE Language: hoelang.md
   - Binaries info: binaries.md
   - Constants & Types: constants.md
   - About: about.md
