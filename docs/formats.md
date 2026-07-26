@@ -54,6 +54,7 @@ TM_SECTION_TYPE can have the following values:
 
 | Value | Meaning                 |
 |-------|-------------------------|
+| 0x01  | Camera angles           |
 | 0x04  | Door coordinates (?)    |
 | 0x06  | NPC section (?)         |
 | 0x07  | Description section (?) |
