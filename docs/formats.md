@@ -62,6 +62,7 @@ TM_SECTION_TYPE can have the following values:
 TM_Generic_Content is just a union of these structures:
 
 - TM_Coord_Content
+- TM_Description_Content
 - TM_Item_Content
 
 Depending on the TM_SECTION_TYPE, the content must be interpreted in different
@@ -90,6 +91,20 @@ of the previous structures.
 These TM_Coord_Content seem to hold info on the position and rotation of both
 characters (player and teammate, or Player 1 and Player 2) when they enter the
 room through a specific door. The first 2 fields probably specify the door.
+
+### TM_Description_Content
+
+| Type      | Size | Name    | Description                                                      |
+|-----------|------|---------|------------------------------------------------------------------|
+| uint32    | 4    | Index   | The index of the description among all descriptions in the room. |
+| float     | 4    | PosX    | X coordinate of the box that triggers the description.           |
+| float     | 4    | PosY    | Y coordinate of the box that triggers the description.           |
+| float[14] | 4*14 | ???     | ??? Probably Z coordinate, the rotation, etc                     |
+| uint32    | 4    | Text ID | An ID associated with a text in the LNG files.                   |
+
+These TM_Description_Contents hold information on the elements in the rooms that
+display a text in the bottom part of the screen when pressing the X/A/Enter
+button/key.
 
 ### TM_Item_Content:
 
